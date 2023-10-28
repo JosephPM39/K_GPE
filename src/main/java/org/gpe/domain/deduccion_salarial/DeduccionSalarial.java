@@ -41,7 +41,8 @@ public class DeduccionSalarial implements IDeduccion, ISalarioBruto {
     for (Salario salario : salariosExtras) {
       totalSalarioExtra += salario.getSalario();
     }
-    this.salarioBruto = salarioHoraExtra.getSalario() + totalSalarioExtra + salarioBase.getSalario();
+    this.salarioBruto =
+        salarioHoraExtra.getSalario() + totalSalarioExtra + salarioBase.getSalario();
   }
 
   public void calcularDeduccion() {
