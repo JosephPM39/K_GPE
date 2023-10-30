@@ -1,14 +1,19 @@
 package org.gpe.domain.salario;
 
-public class SalarioQuincenal extends Salario {
-  public SalarioQuincenal(Double salarioBaseMensual) {
-    super(salarioBaseMensual);
-    calcularSalario();
+import lombok.Getter;
+
+public class SalarioQuincenal implements Salario {
+  @Getter private final Double salario;
+
+  public SalarioQuincenal(Double salario) {
+    this.salario = salario;
   }
 
-  @Override
-  public Double calcularSalario() {
-    super.setSalario(super.getSalarioBaseMensual() / 2);
-    return super.getSalario();
+  public SalarioQuincenal(SalarioMensual salario) {
+    this.salario = calcularSalario(salario);
+  }
+
+  private Double calcularSalario(SalarioMensual salario) {
+    return salario.getSalario() / 2;
   }
 }
