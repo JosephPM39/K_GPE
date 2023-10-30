@@ -7,6 +7,8 @@ import org.gpe.domain.asistencia.AsistenciaLaboral;
 import org.gpe.domain.asistencia.HorasExtra;
 import org.gpe.domain.deduccion_salarial.DeduccionSalarial;
 import org.gpe.domain.deduccion_salarial.NominaSalarial;
+import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
+import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoMensualFactory;
 import org.gpe.domain.empleado.Empleado;
 import org.gpe.domain.horario.HorarioDiario;
 import org.gpe.domain.horario.HorarioSemanal;
@@ -17,6 +19,9 @@ import org.gpe.domain.utils.Dias;
 public class Demo {
 
   public static void main(String[] args) {
+
+    SalarioImpuestoFactory salarioImpuesto = new SalarioImpuestoMensualFactory(1200.0);
+
     // Fake Empleado
     Empleado empleado = new Empleado();
     empleado.setNombres("Jairo");
@@ -51,7 +56,7 @@ public class Demo {
     nomina.setAsistenciaLaboral(asistenciaLaboral);
     nomina.setEmpleado(empleado);
     nomina.setVigencia("From yesterday");
-    nomina.setDeduccionSalarial(new DeduccionSalarial(salario, horasExtras));
+    nomina.setDeduccionSalarial(new DeduccionSalarial(salarioImpuesto, horasExtras));
 
     // Resultados
     System.out.println(
@@ -62,7 +67,7 @@ public class Demo {
     System.out.println("Salario bruto: " + nomina.getDeduccionSalarial().getSalarioBruto());
     System.out.println("Afp: " + nomina.getDeduccionSalarial().getAfp().getAfpEmpleado());
     System.out.println("Isss: " + nomina.getDeduccionSalarial().getIsss().getIsssEmpleado());
-    System.out.println("Renta: " + nomina.getDeduccionSalarial().getRenta().getRetencion());
-    System.out.println("Salario líquido: " + nomina.getDeduccionSalarial().getSalarioLiquido());
+    System.out.println("Renta: " + nomina.getDeduccionSalarial().getRenta());
+    System.out.println("Salario líquido: " + nomina.getDeduccionSalarial());
   }
 }
