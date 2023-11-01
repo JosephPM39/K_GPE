@@ -9,8 +9,6 @@ import org.gpe.domain.salario.SalarioHoraExtra;
 
 public interface SalarioImpuestoFactory {
     public Renta crearRenta();
-    public Salario crearSalario();
-    public SalarioHoraExtra crearSalarioHoraExtra(HorasExtra horasExtra);
     public Afp crearAfp();
     public Isss crearIsss();
 }

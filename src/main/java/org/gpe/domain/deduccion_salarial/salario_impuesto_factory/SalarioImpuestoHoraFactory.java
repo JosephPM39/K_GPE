@@ -9,29 +9,6 @@ import org.gpe.domain.salario.SalarioMensual;
 import org.gpe.domain.salario.SalarioPorHora;
 
 public class SalarioImpuestoHoraFactory implements SalarioImpuestoFactory {
-    private SalarioMensual salarioMensual;
-    private Double salario;
-
-    public SalarioImpuestoHoraFactory(Double salario) {
-        this.salario = salario;
-    }
-    public SalarioImpuestoHoraFactory(SalarioMensual salarioMensual) {
-        this.salarioMensual = salarioMensual;
-    }
-
-    @Override
-    public SalarioPorHora crearSalario() {
-        if (salario != null) {
-            return new SalarioPorHora(salario);
-        }
-        return new SalarioPorHora(salarioMensual);
-    }
-
-    @Override
-    public SalarioHoraExtra crearSalarioHoraExtra(HorasExtra horasExtra) {
-        return new SalarioHoraExtra(this.crearSalario(), horasExtra);
-    }
-
     @Override
     public IsssHora crearIsss() {
         return new IsssHora();

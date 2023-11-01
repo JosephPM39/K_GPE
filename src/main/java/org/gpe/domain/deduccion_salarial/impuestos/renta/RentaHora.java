@@ -12,6 +12,11 @@ public class RentaHora extends Renta {
         this.tramosHora = convertirTramosAHora();
     }
 
+    @Override
+    public DeduccionRenta calcularDeduccion(Double salario) {
+        return this.aplicarTramo(buscarTramo(tramosHora, salario), salario);
+    }
+
     private ArrayList<Tramo> convertirTramosAHora() {
         ArrayList<Tramo> tramos = new ArrayList<>();
         for (Tramo tramo: super.getTramos()) {

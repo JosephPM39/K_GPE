@@ -9,15 +9,15 @@ public abstract class Afp {
 
   @Getter private final Double afpPorcentajeEmpleado = 7.25 / 100.0;
   @Getter private final Double afpPorcentajePatronal = 7.75 / 100.0;
-  @Getter private final SalarioMensual salarioMaximo = new SalarioMensual(7028.29);
+  @Getter private final Double salarioMaximo = 7028.29;
   @Getter private Double afpEmpleado;
   @Getter private Double afpPatronal;
   @Getter private Double salarioLiquido;
 
   public void calcularDeduccion(Double salario) {
     Double salarioPreAfp = salario;
-    if (salario >= salarioMaximo.getSalario()) {
-      salarioPreAfp = salarioMaximo.getSalario();
+    if (salario >= salarioMaximo) {
+      salarioPreAfp = salarioMaximo;
     }
     aplicarAfp(salarioPreAfp);
   }

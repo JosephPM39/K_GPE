@@ -10,12 +10,12 @@ public class Isss {
   @Getter private Double isssEmpleado;
   @Getter private Double isssPatronal;
   @Getter private Double salarioLiquido;
-  @Getter private SalarioMensual salarioMaximo = new SalarioMensual(1000.0);
+  @Getter private Double salarioMaximo = 1000.0;
 
   public void calcularDeduccion(Double salario) {
     Double salarioPreIsss = salario;
-    if (salario >= salarioMaximo.getSalario()) {
-      salarioPreIsss = salarioMaximo.getSalario();
+    if (salario >= salarioMaximo) {
+      salarioPreIsss = salarioMaximo;
     }
     aplicarIsss(salarioPreIsss);
   }

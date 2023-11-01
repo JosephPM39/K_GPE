@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IsssSemanal extends Isss {
 
-  @Getter final private SalarioPorSemana salarioMaximoSemanal = new SalarioPorSemana(super.getSalarioMaximo());
+  @Getter final private Double salarioMaximoSemanal = (super.getSalarioMaximo() / 30) * 7;
 
   @Override
   public void calcularDeduccion(Double salario) {
     Double salarioPreIsss = salario;
-    if (salario >= salarioMaximoSemanal.getSalario()) {
-      salarioPreIsss = salarioMaximoSemanal.getSalario();
+    if (salario >= salarioMaximoSemanal) {
+      salarioPreIsss = salarioMaximoSemanal;
     }
     super.aplicarIsss(salarioPreIsss);
   }

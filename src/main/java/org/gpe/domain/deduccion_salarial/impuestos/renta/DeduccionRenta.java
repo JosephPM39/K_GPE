@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-class DeduccionRenta {
+public class DeduccionRenta {
   private final Tramo tramo;
   private final Double retencion;
   private final Double salarioLiquido;

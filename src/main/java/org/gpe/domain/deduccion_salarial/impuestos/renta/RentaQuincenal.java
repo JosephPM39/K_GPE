@@ -12,6 +12,11 @@ public class RentaQuincenal extends Renta {
         this.tramosQuincenal = convertirTramosAQuincenal();
     }
 
+    @Override
+    public DeduccionRenta calcularDeduccion(Double salario) {
+        return this.aplicarTramo(buscarTramo(tramosQuincenal, salario), salario);
+    }
+
     private ArrayList<Tramo> convertirTramosAQuincenal() {
         ArrayList<Tramo> tramos = new ArrayList<>();
         for (Tramo tramo: super.getTramos()) {

@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AfpMensual extends Afp {
 
-  @Getter final private SalarioMensual salarioMaximoMensual = new SalarioMensual(super.getSalarioMaximo());
+  @Getter final private Double salarioMaximoMensual = super.getSalarioMaximo();
 
   @Override
   public void calcularDeduccion(Double salario) {
     Double salarioPreAfp = salario;
-    if (salario >= salarioMaximoMensual.getSalario()) {
-      salarioPreAfp = salarioMaximoMensual.getSalario();
+    if (salario >= salarioMaximoMensual) {
+      salarioPreAfp = salarioMaximoMensual;
     }
     super.aplicarAfp(salarioPreAfp);
   }

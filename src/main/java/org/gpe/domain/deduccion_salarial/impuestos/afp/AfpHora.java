@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AfpHora extends Afp {
 
-  @Getter final private SalarioPorHora salarioMaximoHora = new SalarioPorHora(super.getSalarioMaximo());
+  @Getter final private Double salarioMaximoHora = super.getSalarioMaximo() / 30 / 8;
 
   @Override
   public void calcularDeduccion(Double salario) {
     Double salarioPreAfp = salario;
-    if (salario >= salarioMaximoHora.getSalario()) {
-      salarioPreAfp = salarioMaximoHora.getSalario();
+    if (salario >= salarioMaximoHora) {
+      salarioPreAfp = salarioMaximoHora;
     }
     super.aplicarAfp(salarioPreAfp);
   }

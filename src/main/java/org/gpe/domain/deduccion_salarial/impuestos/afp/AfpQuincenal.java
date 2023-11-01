@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AfpQuincenal extends Afp {
 
-  @Getter final private SalarioQuincenal salarioMaximoQuincenal = new SalarioQuincenal(super.getSalarioMaximo());
+  @Getter final private Double salarioMaximoQuincenal = super.getSalarioMaximo() / 2;
 
   @Override
   public void calcularDeduccion(Double salario) {
     Double salarioPreAfp = salario;
-    if (salario >= salarioMaximoQuincenal.getSalario()) {
-      salarioPreAfp = salarioMaximoQuincenal.getSalario();
+    if (salario >= salarioMaximoQuincenal) {
+      salarioPreAfp = salarioMaximoQuincenal;
     }
     super.aplicarAfp(salarioPreAfp);
   }
