@@ -6,6 +6,7 @@ import org.gpe.domain.asistencia.Asistencia;
 import org.gpe.domain.asistencia.AsistenciaLaboral;
 import org.gpe.domain.asistencia.HorasExtra;
 import org.gpe.domain.deduccion_salarial.DeduccionSalarial;
+import org.gpe.domain.deduccion_salarial.NominaItem;
 import org.gpe.domain.deduccion_salarial.NominaSalarial;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoMensualFactory;
@@ -14,6 +15,7 @@ import org.gpe.domain.horario.HorarioDiario;
 import org.gpe.domain.horario.HorarioSemanal;
 import org.gpe.domain.salario.Salario;
 import org.gpe.domain.salario.SalarioMensual;
+import org.gpe.domain.salario.SalarioPorDia;
 import org.gpe.domain.salario.SalarioQuincenal;
 import org.gpe.domain.utils.Dias;
 
@@ -21,7 +23,6 @@ public class Demo {
 
   public static void main(String[] args) {
 
-    Salario salarioBaseMensual = new SalarioMensual(1200.0);
 
     // Fake Empleado
     Empleado empleado = new Empleado();
@@ -49,26 +50,32 @@ public class Demo {
     asistenciaLaboral.registrarAsistencia(LocalDate.of(2023, 10, 9), asistencia);
 
     // Fake Salarios
-    Salario salario = new SalarioMensual(1200.00);
+    // Salario salarioBase = new SalarioMensual(1200.0);
+    // Salario salarioBase = new SalarioQuincenal(600.0);
+    Salario salarioBase = new SalarioPorDia(40.0);
     HorasExtra horasExtras = new HorasExtra(asistenciaLaboral);
+
+    // Fake Registro
+    NominaItem registro = new NominaItem.Builder(empleado, salarioBase).construir();
 
     // Fake Nomina
     NominaSalarial nomina = new NominaSalarial();
-    nomina.setAsistenciaLaboral(asistenciaLaboral);
-    nomina.setEmpleado(empleado);
+    nomina.agregarRegistro(registro);
     nomina.setVigencia("From yesterday");
-    nomina.setDeduccionSalarial(new DeduccionSalarial(salarioBaseMensual));
+
+    NominaItem registroEncontrado = nomina.buscarRegistro("234252-2");
+    registroEncontrado.calcularDeducciones();
 
     // Resultados
     System.out.println(
         "Empleado: "
-            + nomina.getEmpleado().getNombres()
+            + registroEncontrado.getEmpleado().getNombres()
             + " "
-            + nomina.getEmpleado().getApellidos());
-    System.out.println("Salario bruto: " + nomina.getDeduccionSalarial().getSalarioBruto());
-    System.out.println("Afp: " + nomina.getDeduccionSalarial().getAfp().getAfpEmpleado());
-    System.out.println("Isss: " + nomina.getDeduccionSalarial().getIsss().getIsssEmpleado());
-    System.out.println("Renta: " + nomina.getDeduccionSalarial().getDeduccionRenta().getRetencion());
-    System.out.println("Salario líquido: " + nomina.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido());
+            + registroEncontrado.getEmpleado().getApellidos());
+    System.out.println("Salario bruto: " + registroEncontrado.getDeduccionSalarial().getSalarioBruto());
+    System.out.println("Afp: " + registroEncontrado.getDeduccionSalarial().getAfp().getAfpEmpleado());
+    System.out.println("Isss: " + registroEncontrado.getDeduccionSalarial().getIsss().getIsssEmpleado());
+    System.out.println("Renta: " + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getRetencion());
+    System.out.println("Salario líquido: " + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido());
   }
 }
