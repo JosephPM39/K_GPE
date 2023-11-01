@@ -3,9 +3,10 @@ package org.gpe.domain.deduccion_salarial;
 import lombok.Getter;
 import lombok.Setter;
 import org.gpe.domain.asistencia.HorasExtra;
+import org.gpe.domain.deduccion_salarial.impuestos.renta.DeduccionRenta;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 import org.gpe.domain.salario.Salario;
-import org.gpe.domain.salario.SalarioHoraExtra;
+import org.gpe.domain.salario.SalarioExtraordinario;
 import org.gpe.domain.deduccion_salarial.impuestos.renta.Renta;
 import org.gpe.domain.deduccion_salarial.impuestos.isss.Isss;
 import org.gpe.domain.deduccion_salarial.impuestos.afp.Afp;
@@ -20,48 +21,36 @@ public class DeduccionSalarial {
   private Isss isss;
   private Afp afp;
   private Renta renta;
-  private Salario salario;
-  private SalarioHoraExtra salarioHoraExtra;
+  private Salario salarioBase;
+  private ArrayList<SalarioExtraordinario> salariosExtraordinarios;
 
-  private HorasExtra horasExtras;
-  private ArrayList<Salario> salariosExtras;
+  private DeduccionRenta deduccionRenta;
 
   private Double salarioBruto = 0.0;
 
-  public DeduccionSalarial(SalarioImpuestoFactory salarioImpuesto) {
-    this.salarioImpuesto = salarioImpuesto;
+  public DeduccionSalarial(Salario salarioBase) {
+    this.salarioBase = salarioBase;
     calcularDeduccion();
   }
 
-  public DeduccionSalarial(SalarioImpuestoFactory salarioImpuesto, HorasExtra horasExtras) {
-    this.salarioImpuesto = salarioImpuesto;
-    this.horasExtras = horasExtras;
-    calcularDeduccion();
-  }
-
-  public DeduccionSalarial(SalarioImpuestoFactory salarioImpuesto, HorasExtra horasExtras, ArrayList<Salario> salariosExtras) {
-    this.salarioImpuesto = salarioImpuesto;
-    this.horasExtras = horasExtras;
-    this.salariosExtras = salariosExtras;
+  public DeduccionSalarial(Salario salarioBase, ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
+    this.salarioBase = salarioBase;
+    this.salariosExtraordinarios = salariosExtraordinarios;
     calcularDeduccion();
   }
 
   private void crearSalarioImpuesto() {
-    this.salario = salarioImpuesto.crearSalario();
+    this.salarioImpuesto = salarioBase.getSalarioImpuesto();
     this.isss = salarioImpuesto.crearIsss();
     this.afp = salarioImpuesto.crearAfp();
     this.renta = salarioImpuesto.crearRenta();
   }
 
   private void calcularSalarioBruto() {
-    this.salarioBruto += this.salario.getSalario();
-    if (horasExtras != null) {
-      this.salarioHoraExtra = salarioImpuesto.crearSalarioHoraExtra(this.horasExtras);
-      this.salarioBruto += this.salarioHoraExtra.getSalario();
-    }
-    if (salariosExtras != null) {
+    this.salarioBruto += this.salarioBase.getSalario();
+    if (salariosExtraordinarios != null) {
       Double totalSalarioExtra = 0.0;
-      for (Salario salarioExtra : salariosExtras) {
+      for (SalarioExtraordinario salarioExtra : salariosExtraordinarios) {
         totalSalarioExtra += salarioExtra.getSalario();
       }
       this.salarioBruto += totalSalarioExtra;
@@ -74,30 +63,24 @@ public class DeduccionSalarial {
     isss.calcularDeduccion(salarioBruto);
     afp.calcularDeduccion(salarioBruto);
     Double salarioPreRenta = salarioBruto - afp.getAfpEmpleado() - isss.getIsssEmpleado();
-    this.renta.calcularDeduccion(salarioPreRenta);
+    this.deduccionRenta = this.renta.calcularDeduccion(salarioPreRenta);
   }
 
   public static class Builder {
-    private SalarioImpuestoFactory salarioImpuesto;
-    private HorasExtra horasExtra;
-    private ArrayList<Salario> salariosExtras;
+    private Salario salarioBase;
+    private ArrayList<SalarioExtraordinario> salariosExtraordinarios;
 
-    public Builder(SalarioImpuestoFactory salarioImpuesto) {
-      this.salarioImpuesto = salarioImpuesto;
+    public Builder(Salario salarioBase) {
+      this.salarioBase = salarioBase;
     }
 
-    public Builder conHorasExtras(HorasExtra horasExtra) {
-      this.horasExtra = horasExtra;
-      return this;
-    }
-
-    public Builder conSalariosExtras(ArrayList<Salario> salariosExtras) {
-      this.salariosExtras = salariosExtras;
+    public Builder conSalariosExtraordinarios(ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
+      this.salariosExtraordinarios = salariosExtraordinarios;
       return this;
     }
 
     public DeduccionSalarial construir() {
-      return new DeduccionSalarial(salarioImpuesto, horasExtra, salariosExtras);
+      return new DeduccionSalarial(salarioBase, salariosExtraordinarios);
     }
   }
 }
