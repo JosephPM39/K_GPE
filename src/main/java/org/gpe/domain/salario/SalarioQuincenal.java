@@ -1,6 +1,7 @@
 package org.gpe.domain.salario;
 
 import lombok.Getter;
+import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoQuincenalFactory;
 
 public class SalarioQuincenal implements Salario {
   @Getter private final Double salario;
@@ -9,11 +10,7 @@ public class SalarioQuincenal implements Salario {
     this.salario = salario;
   }
 
-  public SalarioQuincenal(SalarioMensual salario) {
-    this.salario = calcularSalario(salario);
-  }
-
-  private Double calcularSalario(SalarioMensual salario) {
-    return salario.getSalario() / 2;
+  public SalarioImpuestoQuincenalFactory getSalarioImpuesto() {
+    return new SalarioImpuestoQuincenalFactory();
   }
 }

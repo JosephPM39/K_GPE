@@ -1,6 +1,7 @@
 package org.gpe.domain.salario;
 
 import lombok.Getter;
+import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoDiarioFactory;
 
 public class SalarioPorDia implements Salario {
   @Getter private final Double salario;
@@ -9,11 +10,8 @@ public class SalarioPorDia implements Salario {
     this.salario = salario;
   }
 
-  public SalarioPorDia(SalarioMensual salario) {
-    this.salario = calcularSalario(salario);
-  }
-
-  private Double calcularSalario(SalarioMensual salario) {
-    return salario.getSalario() / 30;
+  @Override
+  public SalarioImpuestoDiarioFactory getSalarioImpuesto() {
+    return new SalarioImpuestoDiarioFactory();
   }
 }

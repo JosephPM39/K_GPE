@@ -3,41 +3,18 @@ package org.gpe.domain.salario;
 import lombok.Getter;
 import lombok.Setter;
 import org.gpe.domain.asistencia.HorasExtra;
+import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 
-public class SalarioHoraExtra implements Salario {
+public class SalarioHoraExtra implements SalarioExtraordinario {
   private final Double porcentajeHorasDiurnas = 100.0 / 100.0;
   private final Double porcentajeHorasNocturnas = 150.0 / 100.0;
 
   @Getter private Double salarioPorHorasNocturnas;
   @Getter private Double salarioPorHorasDiurnas;
   @Getter private Double salario;
-  @Getter @Setter private HorasExtra horasExtras;
+  @Getter private HorasExtra horasExtras;
 
   SalarioPorHora salarioPorHora;
-
-  public SalarioHoraExtra(Double salario, HorasExtra horasExtras) {
-    salarioPorHora = new SalarioPorHora(salario);
-    this.horasExtras = horasExtras;
-    calcularSalario();
-  }
-
-  public SalarioHoraExtra(SalarioMensual salario, HorasExtra horasExtras) {
-    this.salarioPorHora = new SalarioPorHora(salario);
-    this.horasExtras = horasExtras;
-    calcularSalario();
-  }
-
-  public SalarioHoraExtra(SalarioPorSemana salario, HorasExtra horasExtras) {
-    this.salarioPorHora = new SalarioPorHora(salario.getSalario() / 7 / 8);
-    this.horasExtras = horasExtras;
-    calcularSalario();
-  }
-
-  public SalarioHoraExtra(SalarioPorDia salario, HorasExtra horasExtras) {
-    this.salarioPorHora = new SalarioPorHora(salario.getSalario() / 8);
-    this.horasExtras = horasExtras;
-    calcularSalario();
-  }
 
   public SalarioHoraExtra(SalarioPorHora salario, HorasExtra horasExtras) {
     this.salarioPorHora = new SalarioPorHora(salario.getSalario());
@@ -45,10 +22,9 @@ public class SalarioHoraExtra implements Salario {
     calcularSalario();
   }
 
-  public SalarioHoraExtra(SalarioQuincenal salario, HorasExtra horasExtras) {
-    this.salarioPorHora = new SalarioPorHora(salario.getSalario() / 15 / 8);
-    this.horasExtras = horasExtras;
-    calcularSalario();
+  @Override
+  public SalarioImpuestoFactory getSalarioImpuesto() {
+    return salarioPorHora.getSalarioImpuesto();
   }
 
   private void calcularSalario() {
