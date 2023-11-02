@@ -21,19 +21,19 @@ class IsssMensualTest {
   @Test
   void calcularDeduccion() {
     isss.calcularDeduccion(1200.00);
-    assertEquals(isss.getIsssEmpleado(), 30.00);
-    assertEquals(isss.getIsssPatronal(), 90.00);
-    assertEquals(isss.getSalarioLiquido(), 1170.00);
-    assertEquals(isss.getSalarioMaximo(), 1000.00);
+    assertEquals(30.00, isss.getIsssEmpleado());
+    assertEquals(90.00, isss.getIsssPatronal());
+    assertEquals(1170.00, isss.getSalarioLiquido());
+    assertEquals(1000.00, isss.getSalarioMaximo());
   }
 
   @Test
   void getIsssPorcentajeEmpleado() {
-    assertEquals(isss.getIsssPorcentajeEmpleado(), 0.03);
+    assertEquals(0.03, isss.getIsssPorcentajeEmpleado());
   }
 
   @Test
   void getIsssPorcentajePatronal() {
-    assertEquals(isss.getIsssPorcentajePatronal(), 0.075);
+    assertEquals(0.075, isss.getIsssPorcentajePatronal());
   }
 }
