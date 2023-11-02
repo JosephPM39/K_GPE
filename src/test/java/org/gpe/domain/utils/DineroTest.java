@@ -20,24 +20,24 @@ class DineroTest {
     @Test
     void sumar() {
         dinero.sumar(new Dinero(7.96));
-        assertEquals(57.96, dinero.getMonto().doubleValue());
+        assertEquals(new Dinero(57.96).getMonto(), dinero.getMonto());
       }
 
     @Test
     void restar() {
         dinero.restar(new Dinero(1.84));
-        assertEquals(48.16, dinero.getMonto().doubleValue());
+        assertEquals(new Dinero(48.16).getMonto(), dinero.getMonto());
     }
 
     @Test
     void dividir() {
         dinero.dividir(3.24);
-        assertEquals(15.43, dinero.getMonto().doubleValue());
+        assertEquals(new Dinero(15.43).getMonto(), dinero.getMonto());
     }
 
     @Test
     void multiplicar() {
         dinero.multiplicar(2.5);
-        assertEquals(125.00, dinero.getMonto().doubleValue());
+        assertEquals(new Dinero(125.00).getMonto(), dinero.getMonto());
     }
 }
