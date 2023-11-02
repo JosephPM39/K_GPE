@@ -1,10 +1,9 @@
 package org.gpe.domain.deduccion_salarial;
 
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
 
 @NoArgsConstructor
 public class NominaSalarial {
@@ -24,12 +23,11 @@ public class NominaSalarial {
   }
 
   public NominaItem buscarRegistro(String identificacion) {
-    for (NominaItem registro: registros) {
-       if (registro.getEmpleado().getIdenticicacion().equals(identificacion)) {
-          return registro;
-       }
+    for (NominaItem registro : registros) {
+      if (registro.getEmpleado().getIdenticicacion().equals(identificacion)) {
+        return registro;
+      }
     }
     return null;
   }
-
 }

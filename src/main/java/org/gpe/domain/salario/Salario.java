@@ -4,5 +4,6 @@ import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuest
 
 public interface Salario {
   public Double getSalario();
+
   public SalarioImpuestoFactory getSalarioImpuesto();
 }

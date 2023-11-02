@@ -2,7 +2,6 @@ package org.gpe.domain.deduccion_salarial.impuestos.afp;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.gpe.domain.salario.SalarioMensual;
 
 @NoArgsConstructor
 public abstract class Afp {

@@ -1,17 +1,15 @@
 package org.gpe.domain.deduccion_salarial;
 
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
-import org.gpe.domain.asistencia.HorasExtra;
+import org.gpe.domain.deduccion_salarial.impuestos.afp.Afp;
+import org.gpe.domain.deduccion_salarial.impuestos.isss.Isss;
 import org.gpe.domain.deduccion_salarial.impuestos.renta.DeduccionRenta;
+import org.gpe.domain.deduccion_salarial.impuestos.renta.Renta;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 import org.gpe.domain.salario.Salario;
 import org.gpe.domain.salario.SalarioExtraordinario;
-import org.gpe.domain.deduccion_salarial.impuestos.renta.Renta;
-import org.gpe.domain.deduccion_salarial.impuestos.isss.Isss;
-import org.gpe.domain.deduccion_salarial.impuestos.afp.Afp;
-
-import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -33,7 +31,8 @@ public class DeduccionSalarial {
     calcularDeduccion();
   }
 
-  public DeduccionSalarial(Salario salarioBase, ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
+  public DeduccionSalarial(
+      Salario salarioBase, ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
     this.salarioBase = salarioBase;
     this.salariosExtraordinarios = salariosExtraordinarios;
     calcularDeduccion();
@@ -74,7 +73,8 @@ public class DeduccionSalarial {
       this.salarioBase = salarioBase;
     }
 
-    public Builder conSalariosExtraordinarios(ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
+    public Builder conSalariosExtraordinarios(
+        ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
       this.salariosExtraordinarios = salariosExtraordinarios;
       return this;
     }

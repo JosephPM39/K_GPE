@@ -1,7 +1,6 @@
 package org.gpe.domain.salario;
 
 import lombok.Getter;
-import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoMensualFactory;
 
 public class SalarioMensual implements Salario {
@@ -15,5 +14,4 @@ public class SalarioMensual implements Salario {
   public SalarioImpuestoMensualFactory getSalarioImpuesto() {
     return new SalarioImpuestoMensualFactory();
   }
-
 }

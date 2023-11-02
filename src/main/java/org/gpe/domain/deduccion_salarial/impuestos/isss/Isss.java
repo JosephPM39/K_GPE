@@ -1,6 +1,5 @@
 package org.gpe.domain.deduccion_salarial.impuestos.isss;
 
-import org.gpe.domain.salario.SalarioMensual;
 
 import lombok.Getter;
 
@@ -13,16 +12,19 @@ public class Isss {
   @Getter private Double salarioMaximo = 1000.0;
 
   public void calcularDeduccion(Double salario) {
-    Double salarioPreIsss = salario;
-    if (salario >= salarioMaximo) {
-      salarioPreIsss = salarioMaximo;
-    }
-    aplicarIsss(salarioPreIsss);
+    aplicarIsss(salario);
   }
 
   protected void aplicarIsss(Double salario) {
-    this.isssEmpleado = salario * isssPorcentajeEmpleado;
+    this.isssEmpleado = aplicarSalarioMaximo(salario) * isssPorcentajeEmpleado;
     this.isssPatronal = salario * isssPorcentajePatronal;
     this.salarioLiquido = salario - isssEmpleado;
+  }
+
+  protected Double aplicarSalarioMaximo(Double salario) {
+    if (salario >= salarioMaximo) {
+      return salarioMaximo;
+    }
+    return salario;
   }
 }

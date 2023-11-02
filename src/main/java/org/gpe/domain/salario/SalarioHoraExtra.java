@@ -1,7 +1,6 @@
 package org.gpe.domain.salario;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.gpe.domain.asistencia.HorasExtra;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 
@@ -35,7 +34,7 @@ public class SalarioHoraExtra implements SalarioExtraordinario {
     salario = salarioPorHorasDiurnas + salarioPorHorasNocturnas;
   }
 
-    private Double calcularRecargo(Double salario, Double porcentaje) {
-        return (salario * porcentaje) + salario;
-    }
+  private Double calcularRecargo(Double salario, Double porcentaje) {
+    return (salario * porcentaje) + salario;
+  }
 }
