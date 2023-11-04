@@ -16,14 +16,9 @@ public class SalarioHoraExtra implements SalarioExtraordinario {
   SalarioPorHora salarioPorHora;
 
   public SalarioHoraExtra(SalarioPorHora salario, HorasExtra horasExtras) {
-    this.salarioPorHora = new SalarioPorHora(salario.getSalario());
+    this.salarioPorHora = salario;
     this.horasExtras = horasExtras;
     calcularSalario();
-  }
-
-  @Override
-  public SalarioImpuestoFactory getSalarioImpuesto() {
-    return salarioPorHora.getSalarioImpuesto();
   }
 
   private void calcularSalario() {
