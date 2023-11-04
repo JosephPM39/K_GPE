@@ -9,11 +9,10 @@ public class IsssSemanal extends Isss {
   @Getter private final Double salarioMaximoSemanal = (super.getSalarioMaximo() / 30) * 7;
 
   @Override
-  public void calcularDeduccion(Double salario) {
-    Double salarioPreIsss = salario;
+  public Double aplicarSalarioMaximo(Double salario) {
     if (salario >= salarioMaximoSemanal) {
-      salarioPreIsss = salarioMaximoSemanal;
+      return salarioMaximoSemanal;
     }
-    super.aplicarIsss(salarioPreIsss);
+    return salario;
   }
 }

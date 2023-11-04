@@ -9,11 +9,10 @@ public class IsssQuincenal extends Isss {
   @Getter private final Double salarioMaximoQuincenal = super.getSalarioMaximo() / 2;
 
   @Override
-  public void calcularDeduccion(Double salario) {
-    Double salarioPreIsss = salario;
+  public Double aplicarSalarioMaximo(Double salario) {
     if (salario >= salarioMaximoQuincenal) {
-      salarioPreIsss = salarioMaximoQuincenal;
+      return salarioMaximoQuincenal;
     }
-    super.aplicarIsss(salarioPreIsss);
+    return salario;
   }
 }

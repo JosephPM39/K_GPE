@@ -1,6 +1,5 @@
 package org.gpe.domain.deduccion_salarial.impuestos.isss;
 
-
 import lombok.Getter;
 
 public class Isss {
