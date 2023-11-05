@@ -17,7 +17,7 @@ public class Isss {
   }
 
   protected void aplicarIsss(Dinero salario) {
-    Dinero isssEmpleado = salario.clone();
+    Dinero isssEmpleado = aplicarSalarioMaximo(salario);
     Dinero isssPatronal = salario.clone();
     Dinero salarioLiquido = salario.clone();
     isssEmpleado.aplicarPorcentaje(isssPorcentajeEmpleado);

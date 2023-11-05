@@ -69,11 +69,21 @@ public class Demo {
     System.out.println(
         "Afp: " + registroEncontrado.getDeduccionSalarial().getAfp().getAfpEmpleado().getMonto());
     System.out.println(
-        "Isss: " + registroEncontrado.getDeduccionSalarial().getIsss().getIsssEmpleado().getMonto());
+        "Isss: "
+            + registroEncontrado.getDeduccionSalarial().getIsss().getIsssEmpleado().getMonto());
     System.out.println(
-        "Renta: " + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getRetencion().getMonto());
+        "Renta: "
+            + registroEncontrado
+                .getDeduccionSalarial()
+                .getDeduccionRenta()
+                .getRetencion()
+                .getMonto());
     System.out.println(
         "Salario líquido: "
-            + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido().getMonto());
+            + registroEncontrado
+                .getDeduccionSalarial()
+                .getDeduccionRenta()
+                .getSalarioLiquido()
+                .getMonto());
   }
 }

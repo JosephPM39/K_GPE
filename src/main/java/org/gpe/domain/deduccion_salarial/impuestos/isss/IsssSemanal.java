@@ -13,7 +13,7 @@ public class IsssSemanal extends Isss {
   public Dinero aplicarSalarioMaximo(Dinero salario) {
     salarioMaximoSemanal.dividir(30);
     salarioMaximoSemanal.multiplicar(7);
-    if (salario.getMonto().doubleValue() >= salarioMaximoSemanal.getMonto().doubleValue()) {
+    if (salario.mayorQue(salarioMaximoSemanal)) {
       return salarioMaximoSemanal.clone();
     }
     return salario.clone();

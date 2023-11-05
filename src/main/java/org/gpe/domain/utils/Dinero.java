@@ -28,7 +28,8 @@ public class Dinero {
   }
 
   public void multiplicar(Double factor) {
-    this.monto = this.monto.multiply(toBigDecimal(factor)).setScale(2, RoundingMode.HALF_UP);
+    this.monto =
+        this.monto.multiply(toBigDecimalNotScaled(factor)).setScale(2, RoundingMode.HALF_UP);
   }
 
   public void multiplicar(Integer factor) {
@@ -36,12 +37,18 @@ public class Dinero {
   }
 
   public void sumar(Porcentaje porcentaje) {
-    BigDecimal aumento = this.monto.multiply(toBigDecimal(porcentaje.getPorcentaje())).setScale(2, RoundingMode.HALF_UP);
+    BigDecimal aumento =
+        this.monto
+            .multiply(toBigDecimal(porcentaje.getPorcentaje()))
+            .setScale(2, RoundingMode.HALF_UP);
     this.monto = this.monto.add(aumento);
   }
 
   public void restar(Porcentaje porcentaje) {
-    BigDecimal reduccion = this.monto.multiply(toBigDecimal(porcentaje.getPorcentaje())).setScale(2, RoundingMode.HALF_UP);
+    BigDecimal reduccion =
+        this.monto
+            .multiply(toBigDecimal(porcentaje.getPorcentaje()))
+            .setScale(2, RoundingMode.HALF_UP);
     this.monto = this.monto.subtract(reduccion);
   }
 
@@ -49,8 +56,24 @@ public class Dinero {
     this.multiplicar(porcentaje.getPorcentaje());
   }
 
+  public Boolean mayorQue(Dinero dinero) {
+    return this.monto.compareTo(dinero.getMonto()) > 0;
+  }
+
+  public Boolean menorQue(Dinero dinero) {
+    return this.monto.compareTo(dinero.getMonto()) < 0;
+  }
+
+  public Boolean iguales(Dinero dinero) {
+    return this.monto.compareTo(dinero.getMonto()) == 0;
+  }
+
   private BigDecimal toBigDecimal(Double monto) {
     return new BigDecimal(String.valueOf(monto)).setScale(2, RoundingMode.HALF_UP);
+  }
+
+  private BigDecimal toBigDecimalNotScaled(Double monto) {
+    return new BigDecimal(String.valueOf(monto));
   }
 
   private BigDecimal toBigDecimal(Integer monto) {
@@ -59,5 +82,14 @@ public class Dinero {
 
   public Dinero clone() {
     return new Dinero(this.monto.doubleValue());
+  }
+
+  @Override
+  public String toString() {
+    return this.monto.toString();
+  }
+
+  public Double getDecimal() {
+    return this.monto.doubleValue();
   }
 }

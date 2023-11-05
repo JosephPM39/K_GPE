@@ -12,7 +12,7 @@ public class IsssQuincenal extends Isss {
   @Override
   public Dinero aplicarSalarioMaximo(Dinero salario) {
     salarioMaximoQuincenal.dividir(2);
-    if (salario.getMonto().doubleValue() >= salarioMaximoQuincenal.getMonto().doubleValue()) {
+    if (salario.mayorQue(salarioMaximoQuincenal)) {
       return salarioMaximoQuincenal.clone();
     }
     return salario.clone();

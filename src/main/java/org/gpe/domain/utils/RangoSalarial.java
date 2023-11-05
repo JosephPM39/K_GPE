@@ -14,7 +14,8 @@ public class RangoSalarial {
   }
 
   public Boolean esEnRango(Dinero decimal) {
-    if (decimal.getMonto().doubleValue() >= inicio.getMonto().doubleValue() && decimal.getMonto().doubleValue() <= fin.getMonto().doubleValue()) {
+    if (decimal.getMonto().doubleValue() >= inicio.getMonto().doubleValue()
+        && decimal.getMonto().doubleValue() <= fin.getMonto().doubleValue()) {
       return true;
     }
     return false;

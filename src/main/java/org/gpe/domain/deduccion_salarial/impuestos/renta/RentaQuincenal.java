@@ -38,6 +38,7 @@ public class RentaQuincenal extends Renta {
     sobreExceso.dividir(2);
     cuotaFija.dividir(2);
 
-    return new Tramo(tramo.getNombre(), tramo.getPorcentajeAplicar(), rangoSalarial, sobreExceso, cuotaFija);
+    return new Tramo(
+        tramo.getNombre(), tramo.getPorcentajeAplicar(), rangoSalarial, sobreExceso, cuotaFija);
   }
 }

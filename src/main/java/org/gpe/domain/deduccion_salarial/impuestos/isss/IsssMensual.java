@@ -11,7 +11,7 @@ public class IsssMensual extends Isss {
 
   @Override
   protected Dinero aplicarSalarioMaximo(Dinero salario) {
-    if (salario.getMonto().doubleValue() >= salarioMaximoMensual.getMonto().doubleValue()) {
+    if (salario.mayorQue(salarioMaximoMensual)) {
       return salarioMaximoMensual.clone();
     }
     return salario.clone();
