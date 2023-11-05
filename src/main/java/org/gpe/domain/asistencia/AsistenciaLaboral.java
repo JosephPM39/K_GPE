@@ -36,7 +36,7 @@ public class AsistenciaLaboral {
     LocalDate fechaInicioSolapada =
         this.fechaInicio.isAfter(fechaInicio) ? this.fechaInicio : fechaInicio;
     LocalDate fechaFinalSolapada =
-        this.fechaFinal.isAfter(fechaFinal) ? this.fechaFinal : fechaFinal;
+        this.fechaFinal.isBefore(fechaFinal) ? this.fechaFinal : fechaFinal;
     LocalDate fechaActual = fechaInicioSolapada;
 
     Ausencia permisoVacaciones = new Ausencia("Vacaciones", "Aprobado");
