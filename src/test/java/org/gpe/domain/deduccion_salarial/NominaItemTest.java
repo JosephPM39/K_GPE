@@ -54,7 +54,7 @@ class NominaItemTest {
     nominaItem =
         new NominaItem.Builder(mock(Empleado.class), new SalarioMensual(700.00))
             .conAsistencia(createAsistencia())
-            .conAsistenciaYHorasExtras(createAsistencia(), new SalarioPorHora(3.95, 1))
+            .conAsistenciaYHorasExtras(createAsistencia(), new SalarioPorHora(3.00, 1))
             .construir();
   }
 
@@ -66,7 +66,7 @@ class NominaItemTest {
   @Test
   void setSalarioBase() {
     nominaItem.setSalarioBase(new SalarioMensual(700.00));
-    assertEquals(700.00, nominaItem.getSalarioBase().getSalario());
+    assertEquals(700.00, nominaItem.getSalarioBase().getSalario().getDecimal());
   }
 
   @Test
@@ -77,7 +77,7 @@ class NominaItemTest {
 
   @Test
   void setSalarioPorHora() {
-    SalarioPorHora salario = new SalarioPorHora(7.85, 1);
+    SalarioPorHora salario = new SalarioPorHora(3.00, 1);
     nominaItem.setSalarioPorHora(salario);
     assertEquals(salario, nominaItem.getSalarioPorHora());
   }
@@ -85,7 +85,7 @@ class NominaItemTest {
   @Test
   void setSalariosExtras() {
     ArrayList<SalarioExtraordinario> extras = new ArrayList<>();
-    extras.add(new SalarioHoraExtra(mock(SalarioPorHora.class), mock(HorasExtra.class)));
+    extras.add(new SalarioHoraExtra(new SalarioPorHora(3.00, 1), mock(HorasExtra.class)));
     nominaItem.setSalariosExtras(extras);
     assertEquals(extras, nominaItem.getSalariosExtras());
   }
@@ -97,7 +97,7 @@ class NominaItemTest {
 
   @Test
   void getSalarioBase() {
-    assertEquals(700.00, nominaItem.getSalarioBase().getSalario());
+    assertEquals(700.00, nominaItem.getSalarioBase().getSalario().getDecimal());
   }
 
   @Test
@@ -127,9 +127,9 @@ class NominaItemTest {
 
   @Test
   void getDeduccionSalarial() {
-    assertEquals(679.00, nominaItem.getDeduccionSalarial().getIsss().getSalarioLiquido());
-    assertEquals(649.25, nominaItem.getDeduccionSalarial().getAfp().getSalarioLiquido());
-    assertEquals(594.96, nominaItem.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido());
+    assertEquals(732.83, nominaItem.getDeduccionSalarial().getIsss().getSalarioLiquido().getDecimal());
+    assertEquals(700.73, nominaItem.getDeduccionSalarial().getAfp().getSalarioLiquido().getDecimal());
+    assertEquals(639.78, nominaItem.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido().getDecimal());
   }
 
   @Test

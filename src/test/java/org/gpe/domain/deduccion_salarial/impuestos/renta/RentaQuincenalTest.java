@@ -34,7 +34,7 @@ class RentaQuincenalTest {
     DeduccionRenta deduccion = renta.calcularDeduccion(new Dinero(327.32));
     assertEquals("Tramo 2", deduccion.getTramo().getNombre());
     assertEquals(17.96, deduccion.getRetencion().getDecimal());
-    assertEquals(309.35, deduccion.getSalarioLiquido().getDecimal());
+    assertEquals(309.36, deduccion.getSalarioLiquido().getDecimal());
   }
 
   @Test

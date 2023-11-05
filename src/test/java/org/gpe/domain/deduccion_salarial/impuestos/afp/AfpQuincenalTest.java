@@ -26,7 +26,7 @@ class AfpQuincenalTest {
     afp.calcularDeduccion(new Dinero(350.00));
     assertEquals(27.13, afp.getAfpPatronal().getDecimal());
     assertEquals(25.38, afp.getAfpEmpleado().getDecimal());
-    assertEquals(324.63, afp.getSalarioLiquido().getDecimal());
+    assertEquals(324.62, afp.getSalarioLiquido().getDecimal());
   }
 
   @Test

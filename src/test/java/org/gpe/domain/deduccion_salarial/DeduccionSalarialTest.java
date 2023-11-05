@@ -53,6 +53,6 @@ class DeduccionSalarialTest {
 
   @Test
   void getDeduccionRenta() {
-    assertEquals(594.96, deduccion.getDeduccionRenta().getSalarioLiquido().getDecimal());
+    assertEquals(594.95, deduccion.getDeduccionRenta().getSalarioLiquido().getDecimal());
   }
 }

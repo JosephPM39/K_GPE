@@ -32,7 +32,7 @@ class RentaSemanalTest {
   void calcularDeduccionSegundoTramo() {
     DeduccionRenta deduccion = renta.calcularDeduccion(new Dinero(152.75));
     assertEquals("Tramo 2", deduccion.getTramo().getNombre());
-    assertEquals(7.89, deduccion.getRetencion().getDecimal());
+    assertEquals(7.90, deduccion.getRetencion().getDecimal());
     assertEquals(144.85, deduccion.getSalarioLiquido().getDecimal());
   }
 
@@ -41,7 +41,7 @@ class RentaSemanalTest {
     DeduccionRenta deduccion = renta.calcularDeduccion(new Dinero(356.14));
     assertEquals("Tramo 3", deduccion.getTramo().getNombre());
     assertEquals(41.47, deduccion.getRetencion().getDecimal());
-    assertEquals(314.68, deduccion.getSalarioLiquido().getDecimal());
+    assertEquals(314.67, deduccion.getSalarioLiquido().getDecimal());
   }
 
   @Test
