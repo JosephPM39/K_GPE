@@ -21,32 +21,7 @@ public class NominaItem {
   @Getter private ArrayList<SalarioExtraordinario> salariosExtras = new ArrayList<>();
   @Getter private DeduccionSalarial deduccionSalarial;
 
-  public NominaItem(Empleado empleado, Salario salarioBase) {
-    this.empleado = empleado;
-    this.salarioBase = salarioBase;
-    calcularDeducciones();
-  }
-
-  public NominaItem(Empleado empleado, Salario salarioBase, AsistenciaLaboral asistencia) {
-    this.empleado = empleado;
-    this.salarioBase = salarioBase;
-    this.asistencia = asistencia;
-    calcularDeducciones();
-  }
-
-  public NominaItem(
-      Empleado empleado,
-      Salario salarioBase,
-      AsistenciaLaboral asistencia,
-      SalarioPorHora salarioPorHora) {
-    this.empleado = empleado;
-    this.salarioBase = salarioBase;
-    this.asistencia = asistencia;
-    this.salarioPorHora = salarioPorHora;
-    calcularDeducciones();
-  }
-
-  public NominaItem(
+  private NominaItem(
       Empleado empleado,
       Salario salarioBase,
       AsistenciaLaboral asistencia,
