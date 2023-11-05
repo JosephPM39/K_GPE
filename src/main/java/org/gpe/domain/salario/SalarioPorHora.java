@@ -11,8 +11,7 @@ public class SalarioPorHora implements SalarioEspecial {
   public SalarioPorHora(Double tarifa, Integer unidades) {
     this.tarifa = new Dinero(tarifa);
     this.unidades = unidades;
-    Dinero salario = new Dinero(tarifa);
+    salario = new Dinero(tarifa);
     salario.multiplicar(unidades);
-    this.salario = salario;
   }
 }

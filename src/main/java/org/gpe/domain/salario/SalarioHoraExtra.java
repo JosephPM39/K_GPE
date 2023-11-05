@@ -31,9 +31,8 @@ public class SalarioHoraExtra implements SalarioExtraordinario {
     recargoNocturno.multiplicar(horasExtras.getHorasNocturnas());
     salarioPorHorasNocturnas = recargoNocturno;
 
-    Dinero salario = new Dinero(recargoDiurno);
+    salario = new Dinero(recargoDiurno);
     salario.sumar(recargoNocturno);
-    this.salario = salario;
   }
 
   private Dinero calcularRecargo(Dinero salario, Porcentaje porcentaje) {

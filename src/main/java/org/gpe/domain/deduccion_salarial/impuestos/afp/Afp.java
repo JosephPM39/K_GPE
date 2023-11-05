@@ -23,21 +23,18 @@ public abstract class Afp {
   }
 
   protected void calcularSalarioLiquido(Dinero salario) {
-    Dinero salarioLiquido = new Dinero(salario);
+    this.salarioLiquido = new Dinero(salario);
     salarioLiquido.restar(afpEmpleado);
-    this.salarioLiquido = salarioLiquido;
   }
 
   protected void aplicarAfpEmpleado(Dinero salario) {
-    Dinero afpEmpleado = aplicarSalarioMaximo(salario);
+    this.afpEmpleado = aplicarSalarioMaximo(salario);
     afpEmpleado.aplicarPorcentaje(afpPorcentajeEmpleado);
-    this.afpEmpleado = afpEmpleado;
   }
 
   protected void aplicarAfpEmpleador(Dinero salario) {
-    Dinero afpPatronal = new Dinero(salario);
+    this.afpPatronal = new Dinero(salario);
     afpPatronal.aplicarPorcentaje(afpPorcentajePatronal);
-    this.afpPatronal = afpPatronal;
   }
 
   protected Dinero aplicarSalarioMaximo(Dinero monto) {
