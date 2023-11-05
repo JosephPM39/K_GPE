@@ -47,6 +47,8 @@ class NominaSalarialTest {
 
   @Test
   void setVigencia() {
-    nominaSalarial.setVigencia("Octubre - Noviembre (2023)");
+    String vigencia = "Octubre - Noviembre (2023)";
+    nominaSalarial.setVigencia(vigencia);
+    assertEquals(vigencia, nominaSalarial.getVigencia());
   }
 }
