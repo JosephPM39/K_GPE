@@ -13,25 +13,15 @@ public class RangoSalarial {
     this.fin = fin;
   }
 
-  public Boolean esEnRango(Dinero decimal) {
-    if (decimal.getMonto().doubleValue() >= inicio.getMonto().doubleValue()
-        && decimal.getMonto().doubleValue() <= fin.getMonto().doubleValue()) {
-      return true;
-    }
-    return false;
+  public boolean esEnRango(Dinero decimal) {
+    return !esPreRango(decimal) && !esPosRango(decimal);
   }
 
-  public Boolean esPreRango(Dinero decimal) {
-    if (decimal.getMonto().doubleValue() <= inicio.getMonto().doubleValue()) {
-      return true;
-    }
-    return false;
+  public boolean esPreRango(Dinero decimal) {
+    return decimal.getMonto().doubleValue() < inicio.getMonto().doubleValue();
   }
 
-  public Boolean esPosRango(Dinero decimal) {
-    if (decimal.getMonto().doubleValue() >= fin.getMonto().doubleValue()) {
-      return true;
-    }
-    return false;
+  public boolean esPosRango(Dinero decimal) {
+    return decimal.getMonto().doubleValue() > fin.getMonto().doubleValue();
   }
 }
