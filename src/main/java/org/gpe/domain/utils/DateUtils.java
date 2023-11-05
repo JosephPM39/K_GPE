@@ -4,6 +4,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class DateUtils {
+
+  private DateUtils() {}
   public static Dias getDayOfWeek(LocalDate date) {
     if (date.getDayOfWeek() == DayOfWeek.MONDAY) {
       return Dias.LUNES;

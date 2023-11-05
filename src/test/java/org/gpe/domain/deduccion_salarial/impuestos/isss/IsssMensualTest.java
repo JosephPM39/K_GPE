@@ -42,11 +42,11 @@ class IsssMensualTest {
 
   @Test
   void getIsssPorcentajeEmpleado() {
-    assertEquals(0.03, isss.getIsssPorcentajeEmpleado().getPorcentaje());
+    assertEquals(0.03, isss.getIsssPorcentajeEmpleado().getValor());
   }
 
   @Test
   void getIsssPorcentajePatronal() {
-    assertEquals(0.075, isss.getIsssPorcentajePatronal().getPorcentaje());
+    assertEquals(0.075, isss.getIsssPorcentajePatronal().getValor());
   }
 }

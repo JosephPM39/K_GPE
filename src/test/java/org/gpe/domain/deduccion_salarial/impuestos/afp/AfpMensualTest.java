@@ -44,11 +44,11 @@ class AfpMensualTest {
 
   @Test
   void getPorcentajePatronal() {
-    assertEquals(7.75, afp.getAfpPorcentajePatronal().getValor());
+    assertEquals(7.75, afp.getAfpPorcentajePatronal().getValorNatural());
   }
 
   @Test
   void getPorcentajeEmpleado() {
-    assertEquals(7.25, afp.getAfpPorcentajeEmpleado().getValor());
+    assertEquals(7.25, afp.getAfpPorcentajeEmpleado().getValorNatural());
   }
 }

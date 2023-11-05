@@ -43,7 +43,7 @@ public class Dinero {
   public void sumar(Porcentaje porcentaje) {
     BigDecimal aumento =
         this.monto
-            .multiply(toBigDecimal(porcentaje.getPorcentaje()))
+            .multiply(toBigDecimal(porcentaje.getValor()))
             .setScale(2, RoundingMode.HALF_UP);
     this.monto = this.monto.add(aumento);
   }
@@ -51,13 +51,13 @@ public class Dinero {
   public void restar(Porcentaje porcentaje) {
     BigDecimal reduccion =
         this.monto
-            .multiply(toBigDecimal(porcentaje.getPorcentaje()))
+            .multiply(toBigDecimal(porcentaje.getValor()))
             .setScale(2, RoundingMode.HALF_UP);
     this.monto = this.monto.subtract(reduccion);
   }
 
   public void aplicarPorcentaje(Porcentaje porcentaje) {
-    this.multiplicar(porcentaje.getPorcentaje());
+    this.multiplicar(porcentaje.getValor());
   }
 
   public boolean mayorQue(Dinero dinero) {
