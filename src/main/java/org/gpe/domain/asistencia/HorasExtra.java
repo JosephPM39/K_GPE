@@ -12,16 +12,16 @@ import org.gpe.domain.utils.Dias;
 
 public class HorasExtra {
   private LocalTime horaMaximaDiurna = LocalTime.of(19, 0);
-  @Getter @Setter private int horasDiurnas = 0;
-  @Getter @Setter private int horasNocturnas = 0;
-  @Getter @Setter private AsistenciaLaboral asistencias;
+  @Getter private int horasDiurnas = 0;
+  @Getter private int horasNocturnas = 0;
+  @Getter private AsistenciaLaboral asistencias;
 
   public HorasExtra(AsistenciaLaboral asistencias) {
     this.asistencias = asistencias;
     calcularHorasExtras();
   }
 
-  public void calcularHorasExtras() {
+  private void calcularHorasExtras() {
     LocalDate fechaInicial = asistencias.getFechaInicio();
     LocalDate fechaFinal = asistencias.getFechaFinal();
 
@@ -62,7 +62,7 @@ public class HorasExtra {
     if (horaSalidaAsistencia.isBefore(horaMaximaDiurna)) {
       return 0;
     }
-    return calcularTotalHoras(horaSalidaHorario, horaSalidaAsistencia);
+    return calcularTotalHoras(horaMaximaDiurna, horaSalidaAsistencia);
   }
 
   private int calcularTotalHoras(LocalTime desde, LocalTime hasta) {
