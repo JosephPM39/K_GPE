@@ -23,7 +23,7 @@ public abstract class Afp {
   }
 
   protected void calcularSalarioLiquido(Dinero salario) {
-    Dinero salarioLiquido = salario.clone();
+    Dinero salarioLiquido = new Dinero(salario);
     salarioLiquido.restar(afpEmpleado);
     this.salarioLiquido = salarioLiquido;
   }
@@ -35,16 +35,16 @@ public abstract class Afp {
   }
 
   protected void aplicarAfpEmpleador(Dinero salario) {
-    Dinero afpPatronal = salario.clone();
+    Dinero afpPatronal = new Dinero(salario);
     afpPatronal.aplicarPorcentaje(afpPorcentajePatronal);
     this.afpPatronal = afpPatronal;
   }
 
   protected Dinero aplicarSalarioMaximo(Dinero monto) {
     if (monto.mayorQue(this.getSalarioMaximo())) {
-      return this.getSalarioMaximo().clone();
+      return new Dinero(this.getSalarioMaximo());
     }
-    return monto.clone();
+    return new Dinero(monto);
   }
 
   protected abstract Dinero getSalarioMaximo();

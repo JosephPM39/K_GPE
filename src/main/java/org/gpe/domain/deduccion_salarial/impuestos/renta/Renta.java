@@ -20,12 +20,12 @@ public abstract class Renta {
   }
 
   protected DeduccionRenta aplicarTramo(Tramo tramo, Dinero salario) {
-    Dinero retencion = salario.clone();
+    Dinero retencion = new Dinero(salario);
     retencion.restar(tramo.getSobreExceso());
     retencion.aplicarPorcentaje(tramo.getPorcentajeAplicar());
     retencion.sumar(tramo.getCuotaFija());
 
-    Dinero salarioLiquido = salario.clone();
+    Dinero salarioLiquido = new Dinero(salario);
     salarioLiquido.restar(retencion);
     return new DeduccionRenta(tramo, retencion, salarioLiquido);
   }

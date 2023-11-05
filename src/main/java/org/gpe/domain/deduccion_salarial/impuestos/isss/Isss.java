@@ -20,7 +20,7 @@ public abstract class Isss {
   }
 
   protected void calcularSalarioLiquido(Dinero salario) {
-    Dinero salarioLiquido = salario.clone();
+    Dinero salarioLiquido = new Dinero(salario);
     salarioLiquido.restar(isssEmpleado);
     this.salarioLiquido = salarioLiquido;
   }
@@ -32,16 +32,16 @@ public abstract class Isss {
   }
 
   protected void aplicarIsssEmpleador(Dinero salario) {
-    Dinero isssPatronal = salario.clone();
+    Dinero isssPatronal = new Dinero(salario);
     isssPatronal.aplicarPorcentaje(isssPorcentajePatronal);
     this.isssPatronal = isssPatronal;
   }
 
   protected Dinero aplicarSalarioMaximo(Dinero monto) {
     if (monto.mayorQue(this.getSalarioMaximo())) {
-      return this.getSalarioMaximo().clone();
+      return new Dinero(this.getSalarioMaximo());
     }
-    return monto.clone();
+    return new Dinero(monto);
   }
 
   protected abstract Dinero getSalarioMaximo();

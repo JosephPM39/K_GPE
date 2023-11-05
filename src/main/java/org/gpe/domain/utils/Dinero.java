@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import lombok.Getter;
 
-public class Dinero {
+public class Dinero implements Cloneable {
   @Getter private BigDecimal monto = new BigDecimal("0.00");
+
+  public Dinero(Dinero dinero) {
+    this.monto = dinero.getMonto();
+  }
 
   public Dinero(Double monto) {
     this.monto = this.monto.add(toBigDecimal(monto));
@@ -56,15 +60,15 @@ public class Dinero {
     this.multiplicar(porcentaje.getPorcentaje());
   }
 
-  public Boolean mayorQue(Dinero dinero) {
+  public boolean mayorQue(Dinero dinero) {
     return this.monto.compareTo(dinero.getMonto()) > 0;
   }
 
-  public Boolean menorQue(Dinero dinero) {
+  public boolean menorQue(Dinero dinero) {
     return this.monto.compareTo(dinero.getMonto()) < 0;
   }
 
-  public Boolean iguales(Dinero dinero) {
+  public boolean iguales(Dinero dinero) {
     return this.monto.compareTo(dinero.getMonto()) == 0;
   }
 
@@ -79,11 +83,6 @@ public class Dinero {
   private BigDecimal toBigDecimal(Integer monto) {
     return new BigDecimal(String.valueOf(monto)).setScale(2, RoundingMode.HALF_UP);
   }
-
-  public Dinero clone() {
-    return new Dinero(this.monto.doubleValue());
-  }
-
   @Override
   public String toString() {
     return this.monto.toString();

@@ -57,7 +57,7 @@ public class DeduccionSalarial {
     this.isss = isssCalculator.calcularDeduccion(salarioBruto);
     this.afp = afpCalculator.calcularDeduccion(salarioBruto);
 
-    Dinero salarioPreRenta = salarioBruto.clone();
+    Dinero salarioPreRenta = new Dinero(salarioBruto);
     salarioPreRenta.restar(this.isss.getEmpleado());
     salarioPreRenta.restar(this.afp.getEmpleado());
 

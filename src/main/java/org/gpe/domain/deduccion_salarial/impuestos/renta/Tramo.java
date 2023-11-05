@@ -15,7 +15,7 @@ class Tramo {
   private final Dinero sobreExceso;
   private final Dinero cuotaFija;
 
-  public Boolean esEnRangoSalarial(Dinero salario) {
+  public boolean esEnRangoSalarial(Dinero salario) {
     return rangoSalarial.esEnRango(salario);
   }
 }
