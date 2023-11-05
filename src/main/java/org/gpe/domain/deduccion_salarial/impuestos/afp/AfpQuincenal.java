@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.gpe.domain.utils.Dinero;
 
-
 @NoArgsConstructor
 public class AfpQuincenal extends Afp {
 

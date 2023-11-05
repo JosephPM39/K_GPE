@@ -43,5 +43,4 @@ public abstract class Isss {
   }
 
   protected abstract Dinero getSalarioMaximo();
-
 }

@@ -46,5 +46,4 @@ public abstract class Afp {
   }
 
   protected abstract Dinero getSalarioMaximo();
-
 }
