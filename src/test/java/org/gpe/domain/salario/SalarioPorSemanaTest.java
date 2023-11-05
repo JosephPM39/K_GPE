@@ -21,7 +21,7 @@ class SalarioPorSemanaTest {
 
   @Test
   void getSalario() {
-    assertEquals(80.0, salario.getSalario());
+    assertEquals(80.0, salario.getSalario().getDecimal());
   }
 
   @Test

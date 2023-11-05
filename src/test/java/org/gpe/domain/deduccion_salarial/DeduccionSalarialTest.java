@@ -28,12 +28,12 @@ class DeduccionSalarialTest {
 
   @Test
   void getIsss() {
-    assertEquals(679.00, deduccion.getIsss().getSalarioLiquido());
+    assertEquals(679.00, deduccion.getIsss().getSalarioLiquido().getDecimal());
   }
 
   @Test
   void getAfp() {
-    assertEquals(649.25, deduccion.getAfp().getSalarioLiquido());
+    assertEquals(649.25, deduccion.getAfp().getSalarioLiquido().getDecimal());
   }
 
   @Test
@@ -43,7 +43,7 @@ class DeduccionSalarialTest {
 
   @Test
   void getSalarioBase() {
-    assertEquals(700.00, deduccion.getSalarioBase().getSalario());
+    assertEquals(700.00, deduccion.getSalarioBase().getSalario().getDecimal());
   }
 
   @Test
@@ -53,6 +53,6 @@ class DeduccionSalarialTest {
 
   @Test
   void getDeduccionRenta() {
-    assertEquals(594.96, deduccion.getDeduccionRenta().getSalarioLiquido());
+    assertEquals(594.96, deduccion.getDeduccionRenta().getSalarioLiquido().getDecimal());
   }
 }

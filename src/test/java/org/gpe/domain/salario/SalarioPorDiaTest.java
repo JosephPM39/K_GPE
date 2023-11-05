@@ -20,7 +20,7 @@ class SalarioPorDiaTest {
 
   @Test
   void getTarifa() {
-    assertEquals(12.50, salario.getTarifa());
+    assertEquals(12.50, salario.getTarifa().getDecimal());
   }
 
   @Test
@@ -30,6 +30,6 @@ class SalarioPorDiaTest {
 
   @Test
   void getSalario() {
-    assertEquals(87.50, salario.getSalario());
+    assertEquals(87.50, salario.getSalario().getDecimal());
   }
 }

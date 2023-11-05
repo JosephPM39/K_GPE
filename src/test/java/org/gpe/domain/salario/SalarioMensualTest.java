@@ -20,7 +20,7 @@ class SalarioMensualTest {
 
   @Test
   void getSalario() {
-    assertEquals(400.0, salario.getSalario());
+    assertEquals(400.0, salario.getSalario().getDecimal());
   }
 
   @Test

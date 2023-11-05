@@ -53,6 +53,7 @@ class NominaItemTest {
   static void setUp() {
     nominaItem =
         new NominaItem.Builder(mock(Empleado.class), new SalarioMensual(700.00))
+            .conAsistencia(createAsistencia())
             .conAsistenciaYHorasExtras(createAsistencia(), new SalarioPorHora(3.95, 1))
             .construir();
   }

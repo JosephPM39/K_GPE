@@ -21,7 +21,7 @@ class SalarioQuincenalTest {
 
   @Test
   void getSalario() {
-    assertEquals(200.0, salario.getSalario());
+    assertEquals(200.00, salario.getSalario().getDecimal());
   }
 
   @Test

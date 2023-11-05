@@ -21,7 +21,7 @@ class SalarioPorHoraTest {
 
   @Test
   void getTarifa() {
-    assertEquals(2.50, salario.getTarifa());
+    assertEquals(2.50, salario.getTarifa().getDecimal());
   }
 
   @Test
@@ -31,6 +31,6 @@ class SalarioPorHoraTest {
 
   @Test
   void getSalario() {
-    assertEquals(90.00, salario.getSalario());
+    assertEquals(90.00, salario.getSalario().getDecimal());
   }
 }
