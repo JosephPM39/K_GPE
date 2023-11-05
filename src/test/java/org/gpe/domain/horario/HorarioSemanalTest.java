@@ -26,9 +26,9 @@ class HorarioSemanalTest {
   void agregarEliminarHorario() {
     HorarioDiario horarioDiario =
         new HorarioDiario("Horario Diario 2", "", LocalTime.of(8, 0), LocalTime.of(13, 0));
-    horario.agregarOSustituirHorario(Dias.Martes, horarioDiario);
-    assertEquals(horarioDiario.getEntrada(), horario.getHorario().get(Dias.Martes).getEntrada());
-    horario.eliminarHorario(Dias.Martes);
-    assertNull(horario.getHorario().get(Dias.Martes));
+    horario.agregarOSustituirHorario(Dias.MARTES, horarioDiario);
+    assertEquals(horarioDiario.getEntrada(), horario.getHorario().get(Dias.MARTES).getEntrada());
+    horario.eliminarHorario(Dias.MARTES);
+    assertNull(horario.getHorario().get(Dias.MARTES));
   }
 }

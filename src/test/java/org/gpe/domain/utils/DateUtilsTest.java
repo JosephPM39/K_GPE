@@ -16,12 +16,12 @@ class DateUtilsTest {
     LocalDate sabado = LocalDate.of(2023, 11, 11);
     LocalDate domingo = LocalDate.of(2023, 11, 12);
 
-    assertEquals(Dias.Lunes, DateUtils.getDayOfWeek(lunes));
-    assertEquals(Dias.Martes, DateUtils.getDayOfWeek(martes));
-    assertEquals(Dias.Miercoles, DateUtils.getDayOfWeek(miercoles));
-    assertEquals(Dias.Jueves, DateUtils.getDayOfWeek(jueves));
-    assertEquals(Dias.Viernes, DateUtils.getDayOfWeek(viernes));
-    assertEquals(Dias.Sabado, DateUtils.getDayOfWeek(sabado));
-    assertEquals(Dias.Domingo, DateUtils.getDayOfWeek(domingo));
+    assertEquals(Dias.LUNES, DateUtils.getDayOfWeek(lunes));
+    assertEquals(Dias.MARTES, DateUtils.getDayOfWeek(martes));
+    assertEquals(Dias.MIERCOLES, DateUtils.getDayOfWeek(miercoles));
+    assertEquals(Dias.JUEVES, DateUtils.getDayOfWeek(jueves));
+    assertEquals(Dias.VIERNES, DateUtils.getDayOfWeek(viernes));
+    assertEquals(Dias.SABADO, DateUtils.getDayOfWeek(sabado));
+    assertEquals(Dias.DOMINGO, DateUtils.getDayOfWeek(domingo));
   }
 }

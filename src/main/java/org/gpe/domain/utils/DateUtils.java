@@ -6,25 +6,25 @@ import java.time.LocalDate;
 public class DateUtils {
   public static Dias getDayOfWeek(LocalDate date) {
     if (date.getDayOfWeek() == DayOfWeek.MONDAY) {
-      return Dias.Lunes;
+      return Dias.LUNES;
     }
     if (date.getDayOfWeek() == DayOfWeek.TUESDAY) {
-      return Dias.Martes;
+      return Dias.MARTES;
     }
     if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-      return Dias.Miercoles;
+      return Dias.MIERCOLES;
     }
     if (date.getDayOfWeek() == DayOfWeek.THURSDAY) {
-      return Dias.Jueves;
+      return Dias.JUEVES;
     }
     if (date.getDayOfWeek() == DayOfWeek.FRIDAY) {
-      return Dias.Viernes;
+      return Dias.VIERNES;
     }
     if (date.getDayOfWeek() == DayOfWeek.SATURDAY) {
-      return Dias.Sabado;
+      return Dias.SABADO;
     }
     if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-      return Dias.Domingo;
+      return Dias.DOMINGO;
     }
     return null;
   }

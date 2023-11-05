@@ -34,7 +34,7 @@ public class Demo {
             "Horario de mantenimiento de equipos",
             LocalTime.of(7, 0),
             LocalTime.of(12, 0));
-    horarioTecnicoSemanal.agregarOSustituirHorario(Dias.Lunes, horarioMantenimiento);
+    horarioTecnicoSemanal.agregarOSustituirHorario(Dias.LUNES, horarioMantenimiento);
 
     // Fake Asistencias
     Asistencia asistencia = new Asistencia(LocalTime.of(7, 0), LocalTime.of(4, 0));

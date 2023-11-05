@@ -23,10 +23,10 @@ class NominaItemTest {
   static HorarioSemanal createHorario() {
     HorarioSemanal horario = new HorarioSemanal("Horario tech", "");
     horario.agregarOSustituirHorario(
-        Dias.Lunes,
+        Dias.LUNES,
         new HorarioDiario("Horario Diario", "", LocalTime.of(7, 0), LocalTime.of(12, 0)));
     horario.agregarOSustituirHorario(
-        Dias.Martes,
+        Dias.MARTES,
         new HorarioDiario("Horario Diario", "", LocalTime.of(7, 0), LocalTime.of(15, 0)));
     return horario;
   }
