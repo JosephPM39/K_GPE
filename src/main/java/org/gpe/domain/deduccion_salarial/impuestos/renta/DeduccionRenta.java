@@ -2,11 +2,12 @@ package org.gpe.domain.deduccion_salarial.impuestos.renta;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.gpe.domain.utils.Dinero;
 
 @AllArgsConstructor
 @Getter
 public class DeduccionRenta {
   private final Tramo tramo;
-  private final Double retencion;
-  private final Double salarioLiquido;
+  private final Dinero retencion;
+  private final Dinero salarioLiquido;
 }

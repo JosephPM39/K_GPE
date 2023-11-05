@@ -9,6 +9,7 @@ import org.gpe.domain.deduccion_salarial.impuestos.renta.Renta;
 import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 import org.gpe.domain.salario.Salario;
 import org.gpe.domain.salario.SalarioExtraordinario;
+import org.gpe.domain.utils.Dinero;
 
 public class DeduccionSalarial {
 
@@ -21,7 +22,7 @@ public class DeduccionSalarial {
 
   @Getter private DeduccionRenta deduccionRenta;
 
-  private Double salarioBruto = 0.0;
+  private Dinero salarioBruto = new Dinero(0.0);
 
   public DeduccionSalarial(Salario salarioBase) {
     this.salarioBase = salarioBase;
@@ -43,13 +44,13 @@ public class DeduccionSalarial {
   }
 
   private void calcularSalarioBruto() {
-    this.salarioBruto += this.salarioBase.getSalario();
+    this.salarioBruto.sumar(this.salarioBase.getSalario());
     if (salariosExtraordinarios != null) {
-      Double totalSalarioExtra = 0.0;
+      Dinero totalSalarioExtra = new Dinero(0.0);
       for (SalarioExtraordinario salarioExtra : salariosExtraordinarios) {
-        totalSalarioExtra += salarioExtra.getSalario();
+        totalSalarioExtra.sumar(salarioExtra.getSalario());
       }
-      this.salarioBruto += totalSalarioExtra;
+      this.salarioBruto.sumar(totalSalarioExtra);
     }
   }
 
@@ -58,7 +59,9 @@ public class DeduccionSalarial {
     calcularSalarioBruto();
     isss.calcularDeduccion(salarioBruto);
     afp.calcularDeduccion(salarioBruto);
-    Double salarioPreRenta = salarioBruto - afp.getAfpEmpleado() - isss.getIsssEmpleado();
+    Dinero salarioPreRenta = salarioBruto.clone();
+    salarioPreRenta.restar(afp.getAfpEmpleado());
+    salarioPreRenta.restar(isss.getIsssEmpleado());
     this.deduccionRenta = this.renta.calcularDeduccion(salarioPreRenta);
   }
 }

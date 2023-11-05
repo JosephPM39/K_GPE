@@ -1,9 +1,11 @@
 package org.gpe.domain.salario;
 
+import org.gpe.domain.utils.Dinero;
+
 public interface SalarioEspecial {
   public Integer getUnidades();
 
-  public Double getTarifa();
+  public Dinero getTarifa();
 
-  public Double getSalario();
+  public Dinero getSalario();
 }

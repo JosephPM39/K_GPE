@@ -23,11 +23,41 @@ public class Dinero {
     this.monto = this.monto.divide(toBigDecimal(factor), 2, RoundingMode.HALF_UP);
   }
 
+  public void dividir(Integer factor) {
+    this.monto = this.monto.divide(toBigDecimal(factor), 2, RoundingMode.HALF_UP);
+  }
+
   public void multiplicar(Double factor) {
     this.monto = this.monto.multiply(toBigDecimal(factor)).setScale(2, RoundingMode.HALF_UP);
   }
 
+  public void multiplicar(Integer factor) {
+    this.monto = this.monto.multiply(toBigDecimal(factor)).setScale(2, RoundingMode.HALF_UP);
+  }
+
+  public void sumar(Porcentaje porcentaje) {
+    BigDecimal aumento = this.monto.multiply(toBigDecimal(porcentaje.getPorcentaje())).setScale(2, RoundingMode.HALF_UP);
+    this.monto = this.monto.add(aumento);
+  }
+
+  public void restar(Porcentaje porcentaje) {
+    BigDecimal reduccion = this.monto.multiply(toBigDecimal(porcentaje.getPorcentaje())).setScale(2, RoundingMode.HALF_UP);
+    this.monto = this.monto.subtract(reduccion);
+  }
+
+  public void aplicarPorcentaje(Porcentaje porcentaje) {
+    this.multiplicar(porcentaje.getPorcentaje());
+  }
+
   private BigDecimal toBigDecimal(Double monto) {
     return new BigDecimal(String.valueOf(monto)).setScale(2, RoundingMode.HALF_UP);
+  }
+
+  private BigDecimal toBigDecimal(Integer monto) {
+    return new BigDecimal(String.valueOf(monto)).setScale(2, RoundingMode.HALF_UP);
+  }
+
+  public Dinero clone() {
+    return new Dinero(this.monto.doubleValue());
   }
 }

@@ -2,17 +2,20 @@ package org.gpe.domain.deduccion_salarial.impuestos.isss;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.gpe.domain.utils.Dinero;
 
 @NoArgsConstructor
 public class IsssSemanal extends Isss {
 
-  @Getter private final Double salarioMaximoSemanal = (super.getSalarioMaximo() / 30) * 7;
+  @Getter private final Dinero salarioMaximoSemanal = super.getSalarioMaximo().clone();
 
   @Override
-  public Double aplicarSalarioMaximo(Double salario) {
-    if (salario >= salarioMaximoSemanal) {
-      return salarioMaximoSemanal;
+  public Dinero aplicarSalarioMaximo(Dinero salario) {
+    salarioMaximoSemanal.dividir(30);
+    salarioMaximoSemanal.multiplicar(7);
+    if (salario.getMonto().doubleValue() >= salarioMaximoSemanal.getMonto().doubleValue()) {
+      return salarioMaximoSemanal.clone();
     }
-    return salario;
+    return salario.clone();
   }
 }

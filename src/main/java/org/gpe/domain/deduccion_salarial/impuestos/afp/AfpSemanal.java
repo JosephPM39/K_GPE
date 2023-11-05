@@ -2,17 +2,20 @@ package org.gpe.domain.deduccion_salarial.impuestos.afp;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.gpe.domain.utils.Dinero;
 
 @NoArgsConstructor
 public class AfpSemanal extends Afp {
 
-  @Getter private final Double salarioMaximoSemanal = (super.getSalarioMaximo() / 30) * 7;
+  @Getter private final Dinero salarioMaximoSemanal = super.getSalarioMaximo().clone();
 
   @Override
-  public void calcularDeduccion(Double salario) {
-    Double salarioPreAfp = salario;
-    if (salario >= salarioMaximoSemanal) {
-      salarioPreAfp = salarioMaximoSemanal;
+  public void calcularDeduccion(Dinero salario) {
+    salarioMaximoSemanal.dividir(30);
+    salarioMaximoSemanal.multiplicar(7);
+    Dinero salarioPreAfp = salario.clone();
+    if (salario.getMonto().doubleValue() >= salarioMaximoSemanal.getMonto().doubleValue()) {
+      salarioPreAfp = salarioMaximoSemanal.clone();
     }
     super.aplicarAfp(salarioPreAfp);
   }

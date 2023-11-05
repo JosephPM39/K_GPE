@@ -44,7 +44,7 @@ public class Demo {
     asistenciaLaboral.registrarAsistencia(LocalDate.of(2023, 10, 9), asistencia);
 
     // Fake Salarios
-    Salario salarioBase = new SalarioMensual(513.43);
+    Salario salarioBase = new SalarioMensual(1200.0);
     HorasExtra horasExtras = new HorasExtra(asistenciaLaboral);
 
     // Fake Registro
@@ -65,15 +65,15 @@ public class Demo {
             + registroEncontrado.getEmpleado().getApellidos());
     System.out.println(
         "Salario bruto: "
-            + registroEncontrado.getDeduccionSalarial().getSalarioBase().getSalario());
+            + registroEncontrado.getDeduccionSalarial().getSalarioBase().getSalario().getMonto());
     System.out.println(
-        "Afp: " + registroEncontrado.getDeduccionSalarial().getAfp().getAfpEmpleado());
+        "Afp: " + registroEncontrado.getDeduccionSalarial().getAfp().getAfpEmpleado().getMonto());
     System.out.println(
-        "Isss: " + registroEncontrado.getDeduccionSalarial().getIsss().getIsssEmpleado());
+        "Isss: " + registroEncontrado.getDeduccionSalarial().getIsss().getIsssEmpleado().getMonto());
     System.out.println(
-        "Renta: " + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getRetencion());
+        "Renta: " + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getRetencion().getMonto());
     System.out.println(
         "Salario líquido: "
-            + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido());
+            + registroEncontrado.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido().getMonto());
   }
 }

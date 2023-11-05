@@ -2,17 +2,19 @@ package org.gpe.domain.deduccion_salarial.impuestos.isss;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.gpe.domain.utils.Dinero;
 
 @NoArgsConstructor
 public class IsssQuincenal extends Isss {
 
-  @Getter private final Double salarioMaximoQuincenal = super.getSalarioMaximo() / 2;
+  @Getter private final Dinero salarioMaximoQuincenal = super.getSalarioMaximo().clone();
 
   @Override
-  public Double aplicarSalarioMaximo(Double salario) {
-    if (salario >= salarioMaximoQuincenal) {
-      return salarioMaximoQuincenal;
+  public Dinero aplicarSalarioMaximo(Dinero salario) {
+    salarioMaximoQuincenal.dividir(2);
+    if (salario.getMonto().doubleValue() >= salarioMaximoQuincenal.getMonto().doubleValue()) {
+      return salarioMaximoQuincenal.clone();
     }
-    return salario;
+    return salario.clone();
   }
 }

@@ -2,14 +2,16 @@ package org.gpe.domain.salario;
 
 import lombok.Getter;
 import org.gpe.domain.asistencia.HorasExtra;
+import org.gpe.domain.utils.Dinero;
+import org.gpe.domain.utils.Porcentaje;
 
 public class SalarioHoraExtra implements SalarioExtraordinario {
-  private final Double porcentajeHorasDiurnas = 100.0 / 100.0;
-  private final Double porcentajeHorasNocturnas = 150.0 / 100.0;
+  private final Porcentaje porcentajeHorasDiurnas = new Porcentaje(100);
+  private final Porcentaje porcentajeHorasNocturnas = new Porcentaje(150);
 
-  @Getter private Double salarioPorHorasNocturnas;
-  @Getter private Double salarioPorHorasDiurnas;
-  @Getter private Double salario;
+  @Getter private Dinero salarioPorHorasNocturnas;
+  @Getter private Dinero salarioPorHorasDiurnas;
+  @Getter private Dinero salario;
   @Getter private HorasExtra horasExtras;
 
   SalarioPorHora salarioPorHora;
@@ -21,14 +23,22 @@ public class SalarioHoraExtra implements SalarioExtraordinario {
   }
 
   private void calcularSalario() {
-    Double recargoDiurno = calcularRecargo(salarioPorHora.getSalario(), porcentajeHorasDiurnas);
-    Double recargoNocturno = calcularRecargo(salarioPorHora.getSalario(), porcentajeHorasNocturnas);
-    salarioPorHorasDiurnas = horasExtras.getHorasDiurnas() * recargoDiurno;
-    salarioPorHorasNocturnas = horasExtras.getHorasNocturnas() * recargoNocturno;
-    salario = salarioPorHorasDiurnas + salarioPorHorasNocturnas;
+    Dinero recargoDiurno = calcularRecargo(salarioPorHora.getSalario(), porcentajeHorasDiurnas);
+    recargoDiurno.multiplicar(horasExtras.getHorasDiurnas());
+    salarioPorHorasDiurnas = recargoDiurno;
+
+    Dinero recargoNocturno = calcularRecargo(salarioPorHora.getSalario(), porcentajeHorasNocturnas);
+    recargoNocturno.multiplicar(horasExtras.getHorasNocturnas());
+    salarioPorHorasNocturnas = recargoNocturno;
+
+    Dinero salario = recargoDiurno.clone();
+    salario.sumar(recargoNocturno);
+    this.salario = salario;
   }
 
-  private Double calcularRecargo(Double salario, Double porcentaje) {
-    return (salario * porcentaje) + salario;
+  private Dinero calcularRecargo(Dinero salario, Porcentaje porcentaje) {
+    Dinero recargo = salario.clone();
+    recargo.sumar(porcentaje);
+    return recargo;
   }
 }
