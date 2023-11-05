@@ -4,34 +4,44 @@ import lombok.Getter;
 import org.gpe.domain.utils.Dinero;
 import org.gpe.domain.utils.Porcentaje;
 
-public class Isss {
+public abstract class Isss {
   @Getter private final Porcentaje isssPorcentajeEmpleado = new Porcentaje(3);
   @Getter private final Porcentaje isssPorcentajePatronal = new Porcentaje(7.5);
   @Getter private Dinero isssEmpleado;
   @Getter private Dinero isssPatronal;
   @Getter private Dinero salarioLiquido;
-  @Getter private Dinero salarioMaximo = new Dinero(1000.00);
 
   public void calcularDeduccion(Dinero salario) {
-    aplicarIsss(salario);
+    aplicarIsssEmpleado(salario);
+    aplicarIsssEmpleador(salario);
+    calcularSalarioLiquido(salario);
   }
 
-  protected void aplicarIsss(Dinero salario) {
-    Dinero isssEmpleado = aplicarSalarioMaximo(salario);
-    Dinero isssPatronal = salario.clone();
+  protected void calcularSalarioLiquido(Dinero salario) {
     Dinero salarioLiquido = salario.clone();
-    isssEmpleado.aplicarPorcentaje(isssPorcentajeEmpleado);
-    isssPatronal.aplicarPorcentaje(isssPorcentajePatronal);
     salarioLiquido.restar(isssEmpleado);
-    this.isssEmpleado = isssEmpleado;
-    this.isssPatronal = isssPatronal;
     this.salarioLiquido = salarioLiquido;
   }
 
-  protected Dinero aplicarSalarioMaximo(Dinero salario) {
-    if (salario.getMonto().doubleValue() >= salarioMaximo.getMonto().doubleValue()) {
-      return salarioMaximo.clone();
-    }
-    return salario.clone();
+  protected void aplicarIsssEmpleado(Dinero salario) {
+    Dinero isssEmpleado = aplicarSalarioMaximo(salario);
+    isssEmpleado.aplicarPorcentaje(isssPorcentajeEmpleado);
+    this.isssEmpleado = isssEmpleado;
   }
+
+  protected void aplicarIsssEmpleador(Dinero salario) {
+    Dinero isssPatronal = salario.clone();
+    isssPatronal.aplicarPorcentaje(isssPorcentajePatronal);
+    this.isssPatronal = isssPatronal;
+  }
+
+  protected Dinero aplicarSalarioMaximo(Dinero monto) {
+    if (monto.mayorQue(this.getSalarioMaximo())) {
+      return this.getSalarioMaximo().clone();
+    }
+    return monto.clone();
+  }
+
+  protected abstract Dinero getSalarioMaximo();
+
 }

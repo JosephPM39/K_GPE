@@ -4,18 +4,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.gpe.domain.utils.Dinero;
 
+
 @NoArgsConstructor
 public class AfpQuincenal extends Afp {
 
-  @Getter private final Dinero salarioMaximoQuincenal = super.getSalarioMaximo().clone();
+  @Getter private final Dinero salarioMaximoQuincenal = new Dinero(3514.15);
 
   @Override
-  public void calcularDeduccion(Dinero salario) {
-    salarioMaximoQuincenal.dividir(2);
-    Dinero salarioPreAfp = salario.clone();
-    if (salario.getMonto().doubleValue() >= salarioMaximoQuincenal.getMonto().doubleValue()) {
-      salarioPreAfp = salarioMaximoQuincenal.clone();
-    }
-    super.aplicarAfp(salarioPreAfp);
+  protected Dinero getSalarioMaximo() {
+    return this.salarioMaximoQuincenal;
   }
 }

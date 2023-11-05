@@ -7,14 +7,10 @@ import org.gpe.domain.utils.Dinero;
 @NoArgsConstructor
 public class IsssQuincenal extends Isss {
 
-  @Getter private final Dinero salarioMaximoQuincenal = super.getSalarioMaximo().clone();
+  @Getter private final Dinero salarioMaximoQuincenal = new Dinero(500.00);
 
   @Override
-  public Dinero aplicarSalarioMaximo(Dinero salario) {
-    salarioMaximoQuincenal.dividir(2);
-    if (salario.mayorQue(salarioMaximoQuincenal)) {
-      return salarioMaximoQuincenal.clone();
-    }
-    return salario.clone();
+  protected Dinero getSalarioMaximo() {
+    return salarioMaximoQuincenal;
   }
 }

@@ -7,16 +7,10 @@ import org.gpe.domain.utils.Dinero;
 @NoArgsConstructor
 public class AfpSemanal extends Afp {
 
-  @Getter private final Dinero salarioMaximoSemanal = super.getSalarioMaximo().clone();
+  @Getter private final Dinero salarioMaximoSemanal = new Dinero(1639.93);
 
   @Override
-  public void calcularDeduccion(Dinero salario) {
-    salarioMaximoSemanal.dividir(30);
-    salarioMaximoSemanal.multiplicar(7);
-    Dinero salarioPreAfp = salario.clone();
-    if (salario.getMonto().doubleValue() >= salarioMaximoSemanal.getMonto().doubleValue()) {
-      salarioPreAfp = salarioMaximoSemanal.clone();
-    }
-    super.aplicarAfp(salarioPreAfp);
+  protected Dinero getSalarioMaximo() {
+    return salarioMaximoSemanal;
   }
 }

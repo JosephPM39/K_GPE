@@ -10,28 +10,41 @@ public abstract class Afp {
 
   @Getter private final Porcentaje afpPorcentajeEmpleado = new Porcentaje(7.25);
   @Getter private final Porcentaje afpPorcentajePatronal = new Porcentaje(7.75);
-  @Getter private final Dinero salarioMaximo = new Dinero(7028.29);
   @Getter private Dinero afpEmpleado;
   @Getter private Dinero afpPatronal;
   @Getter private Dinero salarioLiquido;
 
   public void calcularDeduccion(Dinero salario) {
-    Dinero salarioPreAfp = salario.clone();
-    if (salario.getMonto().doubleValue() >= salarioMaximo.getMonto().doubleValue()) {
-      salarioPreAfp = salarioMaximo.clone();
-    }
-    aplicarAfp(salarioPreAfp);
+    aplicarAfpEmpleado(salario);
+    aplicarAfpEmpleador(salario);
+    calcularSalarioLiquido(salario);
   }
 
-  protected void aplicarAfp(Dinero salario) {
-    Dinero afpEmpleado = salario.clone();
-    Dinero afpPatronal = salario.clone();
+  protected void calcularSalarioLiquido(Dinero salario) {
     Dinero salarioLiquido = salario.clone();
-    afpPatronal.aplicarPorcentaje(afpPorcentajePatronal);
-    afpEmpleado.aplicarPorcentaje(afpPorcentajeEmpleado);
     salarioLiquido.restar(afpEmpleado);
-    this.afpEmpleado = afpEmpleado;
-    this.afpPatronal = afpPatronal;
     this.salarioLiquido = salarioLiquido;
   }
+
+  protected void aplicarAfpEmpleado(Dinero salario) {
+    Dinero afpEmpleado = aplicarSalarioMaximo(salario);
+    afpEmpleado.aplicarPorcentaje(afpPorcentajeEmpleado);
+    this.afpEmpleado = afpEmpleado;
+  }
+
+  protected void aplicarAfpEmpleador(Dinero salario) {
+    Dinero afpPatronal = salario.clone();
+    afpPatronal.aplicarPorcentaje(afpPorcentajePatronal);
+    this.afpPatronal = afpPatronal;
+  }
+
+  protected Dinero aplicarSalarioMaximo(Dinero monto) {
+    if (monto.mayorQue(this.getSalarioMaximo())) {
+      return this.getSalarioMaximo().clone();
+    }
+    return monto.clone();
+  }
+
+  protected abstract Dinero getSalarioMaximo();
+
 }

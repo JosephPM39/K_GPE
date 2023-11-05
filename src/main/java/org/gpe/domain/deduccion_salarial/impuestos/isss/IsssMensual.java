@@ -7,13 +7,10 @@ import org.gpe.domain.utils.Dinero;
 @NoArgsConstructor
 public class IsssMensual extends Isss {
 
-  @Getter private final Dinero salarioMaximoMensual = super.getSalarioMaximo().clone();
+  @Getter private final Dinero salarioMaximoMensual = new Dinero(1000.00);
 
   @Override
-  protected Dinero aplicarSalarioMaximo(Dinero salario) {
-    if (salario.mayorQue(salarioMaximoMensual)) {
-      return salarioMaximoMensual.clone();
-    }
-    return salario.clone();
+  protected Dinero getSalarioMaximo() {
+    return salarioMaximoMensual;
   }
 }
