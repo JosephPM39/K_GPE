@@ -13,23 +13,25 @@ import org.gpe.domain.salario.SalarioPorHora;
 
 public class NominaItem {
   @Getter @Setter private Empleado empleado;
-  @Getter @Setter private Salario salarioBase;
-  @Getter @Setter private AsistenciaLaboral asistencia;
-  @Getter @Setter private HorasExtra horasExtra;
+  @Getter private Salario salarioBase;
+  @Getter private AsistenciaLaboral asistencia;
+  @Getter private HorasExtra horasExtra;
   @Getter private SalarioHoraExtra salarioHoraExtra;
-  @Getter @Setter private SalarioPorHora salarioPorHora;
-  @Getter @Setter private ArrayList<SalarioExtraordinario> salariosExtras = new ArrayList<>();
-  @Getter @Setter private DeduccionSalarial deduccionSalarial;
+  @Getter private SalarioPorHora salarioPorHora;
+  @Getter private ArrayList<SalarioExtraordinario> salariosExtras = new ArrayList<>();
+  @Getter private DeduccionSalarial deduccionSalarial;
 
   public NominaItem(Empleado empleado, Salario salarioBase) {
     this.empleado = empleado;
     this.salarioBase = salarioBase;
+    calcularDeducciones();
   }
 
   public NominaItem(Empleado empleado, Salario salarioBase, AsistenciaLaboral asistencia) {
     this.empleado = empleado;
     this.salarioBase = salarioBase;
     this.asistencia = asistencia;
+    calcularDeducciones();
   }
 
   public NominaItem(
@@ -41,6 +43,7 @@ public class NominaItem {
     this.salarioBase = salarioBase;
     this.asistencia = asistencia;
     this.salarioPorHora = salarioPorHora;
+    calcularDeducciones();
   }
 
   public NominaItem(
@@ -56,17 +59,38 @@ public class NominaItem {
     if (salarioExtras != null) {
       this.salariosExtras.addAll(salarioExtras);
     }
+    calcularDeducciones();
   }
 
-  public void calcularDeducciones() {
+  private void calcularDeducciones() {
+    if (asistencia != null) {
+      this.horasExtra = new HorasExtra(asistencia);
+    }
     if (salarioPorHora != null) {
       this.salarioHoraExtra = new SalarioHoraExtra(salarioPorHora, horasExtra);
-      this.salariosExtras = new ArrayList<>();
+      salariosExtras.add(salarioHoraExtra);
     }
-    this.deduccionSalarial =
-        new DeduccionSalarial.Builder(salarioBase)
-            .conSalariosExtraordinarios(salariosExtras)
-            .construir();
+    this.deduccionSalarial = new DeduccionSalarial(salarioBase, salariosExtras);
+  }
+
+  public void setSalarioBase(Salario salarioBase) {
+    this.salarioBase = salarioBase;
+    calcularDeducciones();
+  }
+
+  public void setAsistencia(AsistenciaLaboral asistencia) {
+    this.asistencia = asistencia;
+    calcularDeducciones();
+  }
+
+  public void setSalarioPorHora(SalarioPorHora salarioPorHora) {
+    this.salarioPorHora = salarioPorHora;
+    calcularDeducciones();
+  }
+
+  public void setSalariosExtras(ArrayList<SalarioExtraordinario> salariosExtras) {
+    this.salariosExtras = salariosExtras;
+    calcularDeducciones();
   }
 
   public static class Builder {
@@ -75,7 +99,7 @@ public class NominaItem {
     private Salario salarioBase;
     private AsistenciaLaboral asistencia;
     private SalarioPorHora salarioPorHora;
-    private ArrayList<SalarioExtraordinario> salariosExtras;
+    private ArrayList<SalarioExtraordinario> salariosExtras = new ArrayList<>();
 
     public Builder(Empleado empleado, Salario salarioBase) {
       this.empleado = empleado;
@@ -94,8 +118,13 @@ public class NominaItem {
       return this;
     }
 
-    public Builder conSalariosExtraordinarios(ArrayList<SalarioExtraordinario> salariosExtras) {
-      this.salariosExtras = salariosExtras;
+    public Builder agregarSalarioExtra(SalarioExtraordinario salarioExtra) {
+      this.salariosExtras.add(salarioExtra);
+      return this;
+    }
+
+    public Builder agregarSalarioExtra(ArrayList<SalarioExtraordinario> salariosExtras) {
+      this.salariosExtras.addAll(salariosExtras);
       return this;
     }
 

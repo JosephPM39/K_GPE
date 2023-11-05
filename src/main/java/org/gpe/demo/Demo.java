@@ -56,7 +56,6 @@ public class Demo {
     nomina.setVigencia("From yesterday");
 
     NominaItem registroEncontrado = nomina.buscarRegistro("234252-2");
-    registroEncontrado.calcularDeducciones();
 
     // Resultados
     System.out.println(
@@ -65,7 +64,8 @@ public class Demo {
             + " "
             + registroEncontrado.getEmpleado().getApellidos());
     System.out.println(
-        "Salario bruto: " + registroEncontrado.getDeduccionSalarial().getSalarioBruto());
+        "Salario bruto: "
+            + registroEncontrado.getDeduccionSalarial().getSalarioBase().getSalario());
     System.out.println(
         "Afp: " + registroEncontrado.getDeduccionSalarial().getAfp().getAfpEmpleado());
     System.out.println(

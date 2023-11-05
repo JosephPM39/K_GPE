@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import lombok.Getter;
-import lombok.Setter;
 import org.gpe.domain.horario.HorarioDiario;
 import org.gpe.domain.horario.HorarioSemanal;
 import org.gpe.domain.utils.DateUtils;
