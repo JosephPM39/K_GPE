@@ -28,17 +28,12 @@ class DeduccionSalarialTest {
 
   @Test
   void getIsss() {
-    assertEquals(679.00, deduccion.getIsss().getSalarioLiquido().getDecimal());
+    assertEquals(679.00, deduccion.getDeduccionIsss().getSalarioLiquido().getDecimal());
   }
 
   @Test
   void getAfp() {
-    assertEquals(649.25, deduccion.getAfp().getSalarioLiquido().getDecimal());
-  }
-
-  @Test
-  void getRenta() {
-    assertNotNull(deduccion.getRenta());
+    assertEquals(649.25, deduccion.getDeduccionAfp().getSalarioLiquido().getDecimal());
   }
 
   @Test

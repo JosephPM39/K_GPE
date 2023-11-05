@@ -112,7 +112,7 @@ class NominaItemTest {
 
   @Test
   void getSalarioHoraExtra() {
-    assertNotNull(nominaItem.getSalariosExtras());
+    assertNotNull(nominaItem.getSalarioHoraExtra());
   }
 
   @Test
@@ -128,9 +128,11 @@ class NominaItemTest {
   @Test
   void getDeduccionSalarial() {
     assertEquals(
-        732.83, nominaItem.getDeduccionSalarial().getIsss().getSalarioLiquido().getDecimal());
+        732.83,
+        nominaItem.getDeduccionSalarial().getDeduccionIsss().getSalarioLiquido().getDecimal());
     assertEquals(
-        700.73, nominaItem.getDeduccionSalarial().getAfp().getSalarioLiquido().getDecimal());
+        700.73,
+        nominaItem.getDeduccionSalarial().getDeduccionAfp().getSalarioLiquido().getDecimal());
     assertEquals(
         639.78,
         nominaItem.getDeduccionSalarial().getDeduccionRenta().getSalarioLiquido().getDecimal());

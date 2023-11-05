@@ -51,4 +51,9 @@ class RentaSemanalTest {
     assertEquals(279.93, deduccion.getRetencion().getDecimal());
     assertEquals(922.23, deduccion.getSalarioLiquido().getDecimal());
   }
+
+  @Test
+  void getTramosSemanals() {
+    assertNotNull(renta.getTramosSemanal());
+  }
 }

@@ -3,32 +3,40 @@ package org.gpe.domain.deduccion_salarial.impuestos.isss;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.gpe.domain.utils.Dinero;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 class IsssSemanalTest {
 
-  IsssSemanal isss = new IsssSemanal();
+  static IsssSemanal isss;
 
-  @BeforeEach
-  void setUp() {
+  @BeforeAll
+  static void setUp() {
     isss = new IsssSemanal();
   }
 
-  @AfterEach
-  void tearDown() {
+  @AfterAll
+  static void tearDown() {
     isss = null;
   }
 
   @Test
-  void calcularDeduccion() {
-    isss.calcularDeduccion(new Dinero(300.00));
-    assertEquals(7.0, isss.getIsssEmpleado().getDecimal());
+  void calcularDeduccionSobreLimite() {
+    DeduccionIsss deduccion = isss.calcularDeduccion(new Dinero(280.00));
+    assertEquals(7.00, deduccion.getEmpleado().getDecimal());
+    assertEquals(21.00, deduccion.getPatronal().getDecimal());
+    assertEquals(273.00, deduccion.getSalarioLiquido().getDecimal());
   }
 
   @Test
-  void getSalarioMaximoSemanal() {
+  void calcularDeduccionBajoLimite() {
+    DeduccionIsss deduccion = isss.calcularDeduccion(new Dinero(163.33));
+    assertEquals(4.90, deduccion.getEmpleado().getDecimal());
+    assertEquals(12.25, deduccion.getPatronal().getDecimal());
+    assertEquals(158.43, deduccion.getSalarioLiquido().getDecimal());
+  }
+
+  @Test
+  void getSalarioMaximoQuincenal() {
     assertEquals(233.33, isss.getSalarioMaximoSemanal().getDecimal());
   }
 }

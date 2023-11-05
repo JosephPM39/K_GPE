@@ -23,22 +23,32 @@ class AfpMensualTest {
 
   @Test
   void calcularDeduccionBajoLimite() {
-    afp.calcularDeduccion(new Dinero(700.00));
-    assertEquals(54.25, afp.getAfpPatronal().getDecimal());
-    assertEquals(50.75, afp.getAfpEmpleado().getDecimal());
-    assertEquals(649.25, afp.getSalarioLiquido().getDecimal());
+    DeduccionAfp deduccion = afp.calcularDeduccion(new Dinero(700.00));
+    assertEquals(54.25, deduccion.getPatronal().getDecimal());
+    assertEquals(50.75, deduccion.getEmpleado().getDecimal());
+    assertEquals(649.25, deduccion.getSalarioLiquido().getDecimal());
   }
 
   @Test
   void calcularDeduccionSobreLimite() {
-    afp.calcularDeduccion(new Dinero(1200.00));
-    assertEquals(93.00, afp.getAfpPatronal().getDecimal());
-    assertEquals(87.00, afp.getAfpEmpleado().getDecimal());
-    assertEquals(1113.00, afp.getSalarioLiquido().getDecimal());
+    DeduccionAfp deduccion = afp.calcularDeduccion(new Dinero(1200.00));
+    assertEquals(93.00, deduccion.getPatronal().getDecimal());
+    assertEquals(87.00, deduccion.getEmpleado().getDecimal());
+    assertEquals(1113.00, deduccion.getSalarioLiquido().getDecimal());
   }
 
   @Test
   void getSalarioMaximoMensual() {
     assertEquals(7028.29, afp.getSalarioMaximoMensual().getDecimal());
+  }
+
+  @Test
+  void getPorcentajePatronal() {
+    assertEquals(7.75, afp.getAfpPorcentajePatronal().getValor());
+  }
+
+  @Test
+  void getPorcentajeEmpleado() {
+    assertEquals(7.25, afp.getAfpPorcentajeEmpleado().getValor());
   }
 }

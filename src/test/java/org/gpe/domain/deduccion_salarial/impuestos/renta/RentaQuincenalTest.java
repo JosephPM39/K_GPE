@@ -52,4 +52,9 @@ class RentaQuincenalTest {
     assertEquals(611.38, deduccion.getRetencion().getDecimal());
     assertEquals(1964.68, deduccion.getSalarioLiquido().getDecimal());
   }
+
+  @Test
+  void getTramosQuincenales() {
+    assertNotNull(renta.getTramosQuincenal());
+  }
 }
