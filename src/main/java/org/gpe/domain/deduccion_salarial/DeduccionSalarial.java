@@ -1,6 +1,7 @@
 package org.gpe.domain.deduccion_salarial;
 
 import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import org.gpe.domain.deduccion_salarial.impuestos.afp.Afp;
 import org.gpe.domain.deduccion_salarial.impuestos.afp.DeduccionAfp;
@@ -15,17 +16,12 @@ import org.gpe.domain.utils.Dinero;
 
 public class DeduccionSalarial {
 
-  private SalarioImpuestoFactory salarioImpuesto;
-  private Isss isss;
-  private Afp afp;
-  private Renta renta;
-
-  @Getter private Salario salarioBase;
-  @Getter private Dinero salarioBruto = new Dinero(0.0);
+  @Getter private final Salario salarioBase;
+  @Getter private final Dinero salarioBruto = new Dinero(0.0);
   @Getter private ArrayList<SalarioExtraordinario> salariosExtraordinarios;
-  @Getter private DeduccionRenta deduccionRenta;
-  @Getter private DeduccionIsss deduccionIsss;
-  @Getter private DeduccionAfp deduccionAfp;
+  @Getter private DeduccionRenta renta;
+  @Getter private DeduccionIsss isss;
+  @Getter private DeduccionAfp afp;
 
   public DeduccionSalarial(Salario salarioBase) {
     this.salarioBase = salarioBase;
@@ -33,17 +29,10 @@ public class DeduccionSalarial {
   }
 
   public DeduccionSalarial(
-      Salario salarioBase, ArrayList<SalarioExtraordinario> salariosExtraordinarios) {
+      Salario salarioBase, List<SalarioExtraordinario> salariosExtraordinarios) {
     this.salarioBase = salarioBase;
-    this.salariosExtraordinarios = salariosExtraordinarios;
+    this.salariosExtraordinarios =  new ArrayList<>(salariosExtraordinarios);
     calcularDeduccion();
-  }
-
-  private void crearSalarioImpuesto() {
-    this.salarioImpuesto = salarioBase.getSalarioImpuesto();
-    this.isss = salarioImpuesto.crearIsss();
-    this.afp = salarioImpuesto.crearAfp();
-    this.renta = salarioImpuesto.crearRenta();
   }
 
   private void calcularSalarioBruto() {
@@ -58,13 +47,20 @@ public class DeduccionSalarial {
   }
 
   private void calcularDeduccion() {
-    crearSalarioImpuesto();
+    SalarioImpuestoFactory salarioImpuesto = salarioBase.getSalarioImpuesto();
+    Isss isssCalculator = salarioImpuesto.crearIsss();
+    Afp afpCalculator = salarioImpuesto.crearAfp();
+    Renta rentaCalculator = salarioImpuesto.crearRenta();
+
     calcularSalarioBruto();
-    deduccionIsss = isss.calcularDeduccion(salarioBruto);
-    deduccionAfp = afp.calcularDeduccion(salarioBruto);
+
+    this.isss = isssCalculator.calcularDeduccion(salarioBruto);
+    this.afp = afpCalculator.calcularDeduccion(salarioBruto);
+
     Dinero salarioPreRenta = salarioBruto.clone();
-    salarioPreRenta.restar(deduccionIsss.getEmpleado());
-    salarioPreRenta.restar(deduccionAfp.getEmpleado());
-    this.deduccionRenta = this.renta.calcularDeduccion(salarioPreRenta);
+    salarioPreRenta.restar(this.isss.getEmpleado());
+    salarioPreRenta.restar(this.afp.getEmpleado());
+
+    this.renta = rentaCalculator.calcularDeduccion(salarioPreRenta);
   }
 }
