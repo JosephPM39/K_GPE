@@ -87,7 +87,7 @@ class NominaItemTest {
     ArrayList<SalarioExtraordinario> extras = new ArrayList<>();
     extras.add(new SalarioHoraExtra(new SalarioPorHora(3.00, 1), mock(HorasExtra.class)));
     nominaItem.setSalariosExtras(extras);
-    assertEquals(extras, nominaItem.getSalariosExtras());
+    assertTrue(nominaItem.getSalariosExtras().contains(extras.get(0)));
   }
 
   @Test

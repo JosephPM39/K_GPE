@@ -1,6 +1,7 @@
 package org.gpe.domain.deduccion_salarial;
 
 import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.gpe.domain.asistencia.AsistenciaLaboral;
@@ -63,18 +64,18 @@ public class NominaItem {
     calcularDeducciones();
   }
 
-  public void setSalariosExtras(ArrayList<SalarioExtraordinario> salariosExtras) {
-    this.salariosExtras = salariosExtras;
+  public void setSalariosExtras(List<SalarioExtraordinario> salariosExtras) {
+    this.salariosExtras = new ArrayList<>(salariosExtras);
     calcularDeducciones();
   }
 
   public static class Builder {
 
-    private Empleado empleado;
-    private Salario salarioBase;
+    private final Empleado empleado;
+    private final Salario salarioBase;
     private AsistenciaLaboral asistencia;
     private SalarioPorHora salarioPorHora;
-    private ArrayList<SalarioExtraordinario> salariosExtras = new ArrayList<>();
+    private final ArrayList<SalarioExtraordinario> salariosExtras = new ArrayList<>();
 
     public Builder(Empleado empleado, Salario salarioBase) {
       this.empleado = empleado;
@@ -98,7 +99,7 @@ public class NominaItem {
       return this;
     }
 
-    public Builder agregarSalarioExtra(ArrayList<SalarioExtraordinario> salariosExtras) {
+    public Builder agregarSalarioExtra(List<SalarioExtraordinario> salariosExtras) {
       this.salariosExtras.addAll(salariosExtras);
       return this;
     }
