@@ -3,6 +3,8 @@ package org.gpe.domain.deduccion_salarial;
 import java.util.ArrayList;
 import lombok.Getter;
 import org.gpe.domain.deduccion_salarial.impuestos.afp.Afp;
+import org.gpe.domain.deduccion_salarial.impuestos.afp.DeduccionAfp;
+import org.gpe.domain.deduccion_salarial.impuestos.isss.DeduccionIsss;
 import org.gpe.domain.deduccion_salarial.impuestos.isss.Isss;
 import org.gpe.domain.deduccion_salarial.impuestos.renta.DeduccionRenta;
 import org.gpe.domain.deduccion_salarial.impuestos.renta.Renta;
@@ -14,15 +16,16 @@ import org.gpe.domain.utils.Dinero;
 public class DeduccionSalarial {
 
   private SalarioImpuestoFactory salarioImpuesto;
-  @Getter private Isss isss;
-  @Getter private Afp afp;
-  @Getter private Renta renta;
+  private Isss isss;
+  private Afp afp;
+  private Renta renta;
+
   @Getter private Salario salarioBase;
+  @Getter private Dinero salarioBruto = new Dinero(0.0);
   @Getter private ArrayList<SalarioExtraordinario> salariosExtraordinarios;
-
   @Getter private DeduccionRenta deduccionRenta;
-
-  private Dinero salarioBruto = new Dinero(0.0);
+  @Getter private DeduccionIsss deduccionIsss;
+  @Getter private DeduccionAfp deduccionAfp;
 
   public DeduccionSalarial(Salario salarioBase) {
     this.salarioBase = salarioBase;
@@ -57,11 +60,11 @@ public class DeduccionSalarial {
   private void calcularDeduccion() {
     crearSalarioImpuesto();
     calcularSalarioBruto();
-    isss.calcularDeduccion(salarioBruto);
-    afp.calcularDeduccion(salarioBruto);
+    deduccionIsss = isss.calcularDeduccion(salarioBruto);
+    deduccionAfp = afp.calcularDeduccion(salarioBruto);
     Dinero salarioPreRenta = salarioBruto.clone();
-    salarioPreRenta.restar(afp.getAfpEmpleado());
-    salarioPreRenta.restar(isss.getIsssEmpleado());
+    salarioPreRenta.restar(deduccionIsss.getEmpleado());
+    salarioPreRenta.restar(deduccionAfp.getEmpleado());
     this.deduccionRenta = this.renta.calcularDeduccion(salarioPreRenta);
   }
 }

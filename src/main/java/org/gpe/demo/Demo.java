@@ -64,13 +64,17 @@ public class Demo {
             + " "
             + registroEncontrado.getEmpleado().getApellidos());
     System.out.println(
-        "Salario bruto: "
-            + registroEncontrado.getDeduccionSalarial().getSalarioBase().getSalario().getMonto());
+        "Salario bruto: " + registroEncontrado.getDeduccionSalarial().getSalarioBruto().getMonto());
     System.out.println(
-        "Afp: " + registroEncontrado.getDeduccionSalarial().getAfp().getAfpEmpleado().getMonto());
+        "Afp: "
+            + registroEncontrado.getDeduccionSalarial().getDeduccionAfp().getEmpleado().getMonto());
     System.out.println(
         "Isss: "
-            + registroEncontrado.getDeduccionSalarial().getIsss().getIsssEmpleado().getMonto());
+            + registroEncontrado
+                .getDeduccionSalarial()
+                .getDeduccionIsss()
+                .getEmpleado()
+                .getMonto());
     System.out.println(
         "Renta: "
             + registroEncontrado

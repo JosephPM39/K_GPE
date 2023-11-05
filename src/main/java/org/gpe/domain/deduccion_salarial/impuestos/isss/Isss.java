@@ -7,14 +7,16 @@ import org.gpe.domain.utils.Porcentaje;
 public abstract class Isss {
   @Getter private final Porcentaje isssPorcentajeEmpleado = new Porcentaje(3);
   @Getter private final Porcentaje isssPorcentajePatronal = new Porcentaje(7.5);
-  @Getter private Dinero isssEmpleado;
-  @Getter private Dinero isssPatronal;
-  @Getter private Dinero salarioLiquido;
+  private Dinero isssEmpleado;
+  private Dinero isssPatronal;
+  private Dinero salarioLiquido;
 
-  public void calcularDeduccion(Dinero salario) {
+  public DeduccionIsss calcularDeduccion(Dinero salario) {
     aplicarIsssEmpleado(salario);
     aplicarIsssEmpleador(salario);
     calcularSalarioLiquido(salario);
+
+    return new DeduccionIsss(isssEmpleado, isssPatronal, salarioLiquido);
   }
 
   protected void calcularSalarioLiquido(Dinero salario) {

@@ -10,14 +10,16 @@ public abstract class Afp {
 
   @Getter private final Porcentaje afpPorcentajeEmpleado = new Porcentaje(7.25);
   @Getter private final Porcentaje afpPorcentajePatronal = new Porcentaje(7.75);
-  @Getter private Dinero afpEmpleado;
-  @Getter private Dinero afpPatronal;
-  @Getter private Dinero salarioLiquido;
+  private Dinero afpEmpleado;
+  private Dinero afpPatronal;
+  private Dinero salarioLiquido;
 
-  public void calcularDeduccion(Dinero salario) {
+  public DeduccionAfp calcularDeduccion(Dinero salario) {
     aplicarAfpEmpleado(salario);
     aplicarAfpEmpleador(salario);
     calcularSalarioLiquido(salario);
+
+    return new DeduccionAfp(afpEmpleado, afpPatronal, salarioLiquido);
   }
 
   protected void calcularSalarioLiquido(Dinero salario) {
