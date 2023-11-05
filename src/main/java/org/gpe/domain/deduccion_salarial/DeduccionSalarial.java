@@ -31,7 +31,7 @@ public class DeduccionSalarial {
   public DeduccionSalarial(
       Salario salarioBase, List<SalarioExtraordinario> salariosExtraordinarios) {
     this.salarioBase = salarioBase;
-    this.salariosExtraordinarios =  new ArrayList<>(salariosExtraordinarios);
+    this.salariosExtraordinarios = new ArrayList<>(salariosExtraordinarios);
     calcularDeduccion();
   }
 

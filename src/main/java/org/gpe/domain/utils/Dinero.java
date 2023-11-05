@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import lombok.Getter;
 
-public class Dinero implements Cloneable {
+public class Dinero {
   @Getter private BigDecimal monto = new BigDecimal("0.00");
 
   public Dinero(Dinero dinero) {
@@ -83,6 +83,7 @@ public class Dinero implements Cloneable {
   private BigDecimal toBigDecimal(Integer monto) {
     return new BigDecimal(String.valueOf(monto)).setScale(2, RoundingMode.HALF_UP);
   }
+
   @Override
   public String toString() {
     return this.monto.toString();
