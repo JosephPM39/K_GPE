@@ -2,7 +2,6 @@ package org.gpe.domain.salario;
 
 import lombok.Getter;
 import org.gpe.domain.asistencia.HorasExtra;
-import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
 
 public class SalarioHoraExtra implements SalarioExtraordinario {
   private final Double porcentajeHorasDiurnas = 100.0 / 100.0;

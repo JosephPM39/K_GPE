@@ -12,5 +12,4 @@ public class SalarioPorDia implements SalarioEspecial {
     this.unidades = unidades;
     this.salario = tarifa * unidades;
   }
-
 }
