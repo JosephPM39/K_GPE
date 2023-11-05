@@ -13,26 +13,9 @@ public class HorarioSemanal extends Horario {
     this.horario = horario;
   }
 
-  private boolean agregarHorario(Dias dia, HorarioDiario horarioDiario) {
-    if (horario.containsKey(dia)) {
-      return false;
-    }
-    horario.put(dia, horarioDiario);
-    return true;
-  }
-
   public boolean eliminarHorario(Dias dia) {
     if (horario.containsKey(dia)) {
       horario.remove(dia);
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  private boolean sustituirHorario(Dias dia, HorarioDiario horarioDiario) {
-    if (horario.containsKey(dia)) {
-      horario.put(dia, horarioDiario);
       return true;
     } else {
       return false;
