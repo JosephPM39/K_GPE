@@ -1,7 +1,7 @@
 package org.gpe.domain.salario;
 
 import lombok.Getter;
-import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoSemanalFactory;
+import org.gpe.domain.deduccion_salarial.tributo_factory.TributoSemanalFactory;
 import org.gpe.domain.utils.Dinero;
 
 public class SalarioPorSemana implements Salario {
@@ -11,7 +11,7 @@ public class SalarioPorSemana implements Salario {
     this.salario = new Dinero(salario);
   }
 
-  public SalarioImpuestoSemanalFactory getSalarioImpuesto() {
-    return new SalarioImpuestoSemanalFactory();
+  public TributoSemanalFactory getSalarioImpuesto() {
+    return new TributoSemanalFactory();
   }
 }

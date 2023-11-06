@@ -3,13 +3,13 @@ package org.gpe.domain.deduccion_salarial;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import org.gpe.domain.deduccion_salarial.impuestos.afp.Afp;
-import org.gpe.domain.deduccion_salarial.impuestos.afp.DeduccionAfp;
-import org.gpe.domain.deduccion_salarial.impuestos.isss.DeduccionIsss;
-import org.gpe.domain.deduccion_salarial.impuestos.isss.Isss;
-import org.gpe.domain.deduccion_salarial.impuestos.renta.DeduccionRenta;
-import org.gpe.domain.deduccion_salarial.impuestos.renta.Renta;
-import org.gpe.domain.deduccion_salarial.salario_impuesto_factory.SalarioImpuestoFactory;
+import org.gpe.domain.deduccion_salarial.tributos.afp.Afp;
+import org.gpe.domain.deduccion_salarial.tributos.afp.DeduccionAfp;
+import org.gpe.domain.deduccion_salarial.tributos.isss.DeduccionIsss;
+import org.gpe.domain.deduccion_salarial.tributos.isss.Isss;
+import org.gpe.domain.deduccion_salarial.tributos.renta.DeduccionRenta;
+import org.gpe.domain.deduccion_salarial.tributos.renta.Renta;
+import org.gpe.domain.deduccion_salarial.tributo_factory.TributoFactory;
 import org.gpe.domain.salario.Salario;
 import org.gpe.domain.salario.SalarioExtraordinario;
 import org.gpe.domain.utils.Dinero;
@@ -47,7 +47,7 @@ public class DeduccionSalarial {
   }
 
   private void calcularDeduccion() {
-    SalarioImpuestoFactory salarioImpuesto = salarioBase.getSalarioImpuesto();
+    TributoFactory salarioImpuesto = salarioBase.getSalarioImpuesto();
     Isss isssCalculator = salarioImpuesto.crearIsss();
     Afp afpCalculator = salarioImpuesto.crearAfp();
     Renta rentaCalculator = salarioImpuesto.crearRenta();
