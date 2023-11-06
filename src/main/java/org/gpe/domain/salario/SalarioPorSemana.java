@@ -11,7 +11,7 @@ public class SalarioPorSemana implements Salario {
     this.salario = new Dinero(salario);
   }
 
-  public TributoSemanalFactory getSalarioImpuesto() {
+  public TributoSemanalFactory getTributo() {
     return new TributoSemanalFactory();
   }
 }

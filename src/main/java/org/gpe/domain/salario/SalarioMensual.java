@@ -12,7 +12,7 @@ public class SalarioMensual implements Salario {
   }
 
   @Override
-  public TributoMensualFactory getSalarioImpuesto() {
+  public TributoMensualFactory getTributo() {
     return new TributoMensualFactory();
   }
 }

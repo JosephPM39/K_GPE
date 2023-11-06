@@ -6,13 +6,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SalarioImpuestoMensualFactoryTest {
-
-  TributoMensualFactory factory;
+class TributoQuincenalFactoryTest {
+  TributoQuincenalFactory factory;
 
   @BeforeEach
   void setUp() {
-    factory = new TributoMensualFactory();
+    factory = new TributoQuincenalFactory();
   }
 
   @AfterEach

@@ -11,7 +11,7 @@ public class SalarioQuincenal implements Salario {
     this.salario = new Dinero(salario);
   }
 
-  public TributoQuincenalFactory getSalarioImpuesto() {
+  public TributoQuincenalFactory getTributo() {
     return new TributoQuincenalFactory();
   }
 }

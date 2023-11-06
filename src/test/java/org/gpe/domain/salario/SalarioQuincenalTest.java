@@ -25,7 +25,7 @@ class SalarioQuincenalTest {
   }
 
   @Test
-  void getSalarioImpuesto() {
-    assertNotEquals(null, salario.getSalarioImpuesto());
+  void getTributo() {
+    assertNotEquals(null, salario.getTributo());
   }
 }

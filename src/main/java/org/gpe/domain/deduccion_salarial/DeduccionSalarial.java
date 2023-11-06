@@ -47,10 +47,10 @@ public class DeduccionSalarial {
   }
 
   private void calcularDeduccion() {
-    TributoFactory salarioImpuesto = salarioBase.getSalarioImpuesto();
-    Isss isssCalculator = salarioImpuesto.crearIsss();
-    Afp afpCalculator = salarioImpuesto.crearAfp();
-    Renta rentaCalculator = salarioImpuesto.crearRenta();
+    TributoFactory tributo = salarioBase.getTributo();
+    Isss isssCalculator = tributo.crearIsss();
+    Afp afpCalculator = tributo.crearAfp();
+    Renta rentaCalculator = tributo.crearRenta();
 
     calcularSalarioBruto();
 
