@@ -1,4 +1,4 @@
-# DP_TESTING_REFACTOR GPE Project (Gestión de Pagos a Empleados)
+# GPE Project (Gestión de Pagos a Empleados)
 
 ## Datos del estudiante:
 
@@ -6,7 +6,7 @@ Estudiante: José Josias Padilla Martínez
 
 Email: josias.jjpm49@gmail.com
 
-Repositorio: [https://github.com/JosephPM39/K_GPE](https://github.com/JosephPM39/K_GPE)
+Video en Youtube: [https://youtu.be/D6oeMMORjTY](https://youtu.be/D6oeMMORjTY)
 
 ## Requerimientos
 
@@ -34,11 +34,12 @@ Repositorio: [https://github.com/JosephPM39/K_GPE](https://github.com/JosephPM39
 ![image](https://raw.githubusercontent.com/JosephPM39/K_GPE/main/images/project%20diagrams-GPE%20v1.png)
 
 ### Diagrama nuevo implementando DP
-    - Abstract Factory
-    - Factory Method
-    - Strategy
-    - Template Method
-    - Builder
+- Abstract Factory
+- Factory Method
+- Strategy
+- Template Method
+- Builder
+
 ![image](https://github.com/JosephPM39/K_GPE/blob/main/images/project%20diagrams-GPE%20v5.png?raw=true)
 
 - Problemas que soluciona
