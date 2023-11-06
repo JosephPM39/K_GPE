@@ -55,9 +55,8 @@ public class Demo {
     Salario salarioBaseQuincenal = new SalarioQuincenal(600.0);
     Salario salarioBaseSemanal = new SalarioPorSemana(200.0);
     // Convirtiendo salario por hora a por semana
-    Salario salarioPor8Horas = new SalarioPorSemana(
-            new SalarioPorHora(6.0, 8).getSalario().getDecimal()
-    );
+    Salario salarioPor8Horas =
+        new SalarioPorSemana(new SalarioPorHora(6.0, 8).getSalario().getDecimal());
     HorasExtra horasExtras = new HorasExtra(asistenciaLaboral);
     SalarioPorHora salarioPorHora = new SalarioPorHora(3.0, 1);
     SalarioHoraExtra salarioHoraExtra = new SalarioHoraExtra(salarioPorHora, horasExtras);
